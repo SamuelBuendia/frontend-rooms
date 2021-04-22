@@ -5,15 +5,15 @@ import { Observable, of, Subscription } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
-import { EmployeeModel as Model } from '../../_models/employee.model';
-import { EmployeeService as ModelsService } from '../../_services/employee.service';
+import { FunctionaryModel as Model } from '../../_models/functionary.model';
+import { FunctionaryService as ModelsService } from '../../_services/functionary.service';
 
 @Component({
-  selector: 'app-employee-edit',
-  templateUrl: './employee-edit.component.html',
-  styleUrls: ['./employee-edit.component.scss']
+  selector: 'app-functionary-edit',
+  templateUrl: './functionary-edit.component.html',
+  styleUrls: ['./functionary-edit.component.scss']
 })
-export class EmployeeEditComponent implements OnInit, OnDestroy {
+export class FunctionaryEditComponent implements OnInit, OnDestroy {
   public id: number;
   public model: Model;
   public previous: Model;
@@ -25,7 +25,7 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
   };
 
   public name: AbstractControl;
-  public description: AbstractControl;
+  public profession: AbstractControl;
   public user: AbstractControl;
 
   public activeTabId: number;
@@ -46,11 +46,11 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
 
     this.formGroup = this.fb.group({
       name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      description: ['', Validators.compose([Validators.maxLength(30)])],
+      profession: ['', Validators.compose([Validators.maxLength(30)])],
       user: [''],
     });
     this.name = this.formGroup.controls['name'];
-    this.description = this.formGroup.controls['description'];
+    this.profession = this.formGroup.controls['profession'];
     this.user = this.formGroup.controls['user'];
   }
 
@@ -70,7 +70,7 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
         if (this.id || this.id > 0) {
           return this.modelsService.getById(this.id);
         }
-        return of({ 'employee': new Model() });
+        return of({ 'functionary': new Model() });
       }),
       catchError((error) => {
         this.requesting = false;
@@ -83,12 +83,12 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
         Object.entries(messageError).forEach(
           ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
-        return of({ 'employee': new Model() });
+        return of({ 'functionary': new Model() });
       }),
     ).subscribe((response: any) => {
       this.requesting = false;
       if (response) {
-        this.model = response.employee;
+        this.model = response.functionary;
         if (response.users) {
           this.model.user = response.users[0];
         }
@@ -102,7 +102,7 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
   loadForm() {
     if (this.model.id) {
       this.name.setValue(this.model.name);
-      this.description.setValue(this.model.description);
+      this.profession.setValue(this.model.profession);
       if (this.model.user) {
         this.user.setValue(this.model.user);
       }
@@ -142,7 +142,7 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
-          this.router.navigate(['/employees']);
+          this.router.navigate(['/functionarys']);
         }
       }),
       catchError((error) => {
@@ -160,7 +160,7 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
       })
     ).subscribe(response => {
       this.requesting = false;
-      this.model = response.employee
+      this.model = response.functionary
     });
     this.subscriptions.push(sbUpdate);
   }
@@ -177,7 +177,7 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
-          this.router.navigate(['/employees']);
+          this.router.navigate(['/functionarys']);
         } else {
           this.formGroup.reset()
         }
@@ -197,7 +197,7 @@ export class EmployeeEditComponent implements OnInit, OnDestroy {
       })
     ).subscribe(response => {
       this.requesting = false;
-      this.model = response.employee as Model
+      this.model = response.functionary as Model
     });
     this.subscriptions.push(sbCreate);
   }

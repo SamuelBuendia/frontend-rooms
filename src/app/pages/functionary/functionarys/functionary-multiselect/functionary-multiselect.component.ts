@@ -1,22 +1,22 @@
 import { Component, forwardRef, Renderer2, ViewChild, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { EmployeeService as ModelsService } from '../../_services/employee.service';
+import { FunctionaryService as ModelsService } from '../../_services/functionary.service';
 import { LazyLoadEvent } from 'primeng/api';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
 export const EPANDED_TEXTAREA_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => EmployeeMultiselectComponent),
+    useExisting: forwardRef(() => FunctionaryMultiselectComponent),
     multi: true,
 };
 
 @Component({
-    selector: 'app-employee-multiselect',
-    templateUrl: './employee-multiselect.component.html',
-    styleUrls: ['./employee-multiselect.component.scss'],
+    selector: 'app-functionary-multiselect',
+    templateUrl: './functionary-multiselect.component.html',
+    styleUrls: ['./functionary-multiselect.component.scss'],
     providers: [EPANDED_TEXTAREA_VALUE_ACCESSOR],
 })
-export class EmployeeMultiselectComponent implements ControlValueAccessor, OnInit {
+export class FunctionaryMultiselectComponent implements ControlValueAccessor, OnInit {
     @Input() model: any;
     @Input() valid: boolean;
     @Input() touched: boolean;
@@ -118,7 +118,7 @@ export class EmployeeMultiselectComponent implements ControlValueAccessor, OnIni
     getModels() {
         this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).toPromise().then(
             response => {
-                this.models = response.employees;
+                this.models = response.functionarys;
                 this.totalRecords = response.meta.total_results;
                 // if (this.model) {
                 //     if (this.model.id) {

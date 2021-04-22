@@ -42,10 +42,10 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'employees',
+        path: 'functionarys',
         loadChildren: () =>
-          import('../pages/employee/employee-routing.module').then(
-            (m) => m.EmployeeRoutingModule
+          import('../pages/functionary/functionary-routing.module').then(
+            (m) => m.FunctionaryRoutingModule
           ),
       },
     ],

@@ -8,24 +8,24 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { AutoCompleteModule } from 'primeng/autocomplete';
-import { EmployeesComponent } from './employees/employees.component';
-import { EmployeeComponent } from './employee.component';
-// import { EmployeeRoutingModule} from './employee-routing.module';
-import { EmployeeEditComponent } from './employees/employee-edit/employee-edit.component';
-import { EmployeeAutocompleteComponent } from './employees/employee-autocomplete/employee-autocomplete.component';
-import { EmployeeService } from './_services/';
+import { FunctionarysComponent } from './functionarys/functionarys.component';
+import { FunctionaryComponent } from './functionary.component';
+// import { FunctionaryRoutingModule} from './functionary-routing.module';
+import { FunctionaryEditComponent } from './functionarys/functionary-edit/functionary-edit.component';
+import { FunctionaryAutocompleteComponent } from './functionarys/functionary-autocomplete/functionary-autocomplete.component';
+import { FunctionaryService } from './_services/';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
-    EmployeesComponent,
-    EmployeeComponent,
-    EmployeeEditComponent,
-    EmployeeAutocompleteComponent,
+    FunctionarysComponent,
+    FunctionaryComponent,
+    FunctionaryEditComponent,
+    FunctionaryAutocompleteComponent,
   ],
   imports: [
     CommonModule,
-    // EmployeeRoutingModule,
+    // FunctionaryRoutingModule,
     InlineSVGModule,
     NgbModalModule,
     NgbDatepickerModule,
@@ -40,8 +40,8 @@ import { RouterModule } from '@angular/router';
   entryComponents: [
   ],
   providers: [
-    EmployeeService,
+    FunctionaryService,
     ConfirmationService
   ]
 })
-export class EmployeeModule {}
+export class FunctionaryModule {}

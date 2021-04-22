@@ -5,8 +5,8 @@ import { environment } from '../../../../environments/environment';
 import { catchError, finalize, tap } from 'rxjs/operators';
 
 @Injectable()
-export class EmployeeService {
-    API_URL = `${environment.apiUrl}employees`;
+export class FunctionaryService {
+    API_URL = `${environment.apiUrl}functionarys`;
     private _subscriptions: Subscription[] = [];
 
     constructor(public http: HttpClient) { }
@@ -66,6 +66,6 @@ export class EmployeeService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=position.*&include[]=user.*`);
+        return this.http.get(`${this.API_URL}/${id}/?include[]=user.*`);
     }
 }

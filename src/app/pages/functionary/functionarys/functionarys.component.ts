@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { EmployeeService as ModelService } from '../_services/employee.service';
-import { EmployeeModel as Model } from '../_models/employee.model';
+import { FunctionaryService as ModelService } from '../_services/functionary.service';
+import { FunctionaryModel as Model } from '../_models/functionary.model';
 import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
@@ -10,11 +10,11 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
 @Component({
-    selector: 'app-employees',
-    templateUrl: './employees.component.html',
-    styleUrls: ['./employees.component.scss']
+    selector: 'app-functionarys',
+    templateUrl: './functionarys.component.html',
+    styleUrls: ['./functionarys.component.scss']
 })
-export class EmployeesComponent implements OnInit {
+export class FunctionarysComponent implements OnInit {
 
     public promiseForm: Promise<any>;
 
@@ -32,7 +32,7 @@ export class EmployeesComponent implements OnInit {
     public _with: { key: string, value: string }[];
 
     public formGroup: FormGroup;
-    public employee_id_filter: AbstractControl;
+    public functionary_id_filter: AbstractControl;
     public department_id_filter: AbstractControl;
     public venue_id_filter: AbstractControl;
 
@@ -53,11 +53,11 @@ export class EmployeesComponent implements OnInit {
         public authService: AuthService,
         fb: FormBuilder) {
         this.formGroup = fb.group({
-            'employee_id_filter': [''],
+            'functionary_id_filter': [''],
             'department_id_filter': [''],
             'venue_id_filter': [''],
         });
-        this.employee_id_filter = this.formGroup.controls['employee_id_filter'];
+        this.functionary_id_filter = this.formGroup.controls['functionary_id_filter'];
         this.department_id_filter = this.formGroup.controls['department_id_filter'];
         this.venue_id_filter = this.formGroup.controls['venue_id_filter'];
 
@@ -120,7 +120,7 @@ export class EmployeesComponent implements OnInit {
         this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).toPromise().then(
             response => {
                 this.requesting = false;
-                this.models = response.employees;
+                this.models = response.functionaries;
                 this.totalRecords = response.meta.total_results;
             },
             error => {
@@ -216,8 +216,8 @@ export class EmployeesComponent implements OnInit {
         }
     }
 
-    confirm(id, employee: string) {
-        this.confirmDialogPosition = employee;
+    confirm(id, functionary: string) {
+        this.confirmDialogPosition = functionary;
         this.confirmationService.confirm({
             message: 'Are you sure that you want to delete?',
             accept: () => {

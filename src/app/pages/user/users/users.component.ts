@@ -33,7 +33,7 @@ export class UsersComponent implements OnInit {
     public _with: { key: string, value: string }[];
 
     public formGroup: FormGroup;
-    public employee_id_filter: AbstractControl;
+    public functionary_id_filter: AbstractControl;
     public department_id_filter: AbstractControl;
     public venue_id_filter: AbstractControl;
 
@@ -54,11 +54,11 @@ export class UsersComponent implements OnInit {
         public authService: AuthService,
         fb: FormBuilder) {
         this.formGroup = fb.group({
-            'employee_id_filter': [''],
+            'functionary_id_filter': [''],
             'department_id_filter': [''],
             'venue_id_filter': [''],
         });
-        this.employee_id_filter = this.formGroup.controls['employee_id_filter'];
+        this.functionary_id_filter = this.formGroup.controls['functionary_id_filter'];
         this.department_id_filter = this.formGroup.controls['department_id_filter'];
         this.venue_id_filter = this.formGroup.controls['venue_id_filter'];
 

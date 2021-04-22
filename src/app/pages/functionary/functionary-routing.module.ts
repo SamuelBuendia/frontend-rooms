@@ -1,26 +1,26 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { EmployeeComponent } from './employee.component';
-import { EmployeesComponent } from './employees/employees.component';
-import { EmployeeEditComponent } from './employees/employee-edit/employee-edit.component';
+import { FunctionaryComponent } from './functionary.component';
+import { FunctionarysComponent } from './functionarys/functionarys.component';
+import { FunctionaryEditComponent } from './functionarys/functionary-edit/functionary-edit.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: EmployeeComponent,
+    component: FunctionaryComponent,
     children: [
       {
         path: 'list',
-        component: EmployeesComponent,
+        component: FunctionarysComponent,
       },
       {
         path: 'add',
-        component: EmployeeEditComponent
+        component: FunctionaryEditComponent
       },
       {
         path: 'edit/:id',
-        component: EmployeeEditComponent
+        component: FunctionaryEditComponent
       },
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: '**', redirectTo: 'list', pathMatch: 'full' },
@@ -32,4 +32,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class EmployeeRoutingModule {}
+export class FunctionaryRoutingModule {}

@@ -1,9 +1,9 @@
 import { UserModel } from "../../user/_models/user.model";
 
-export class EmployeeModel {
+export class FunctionaryModel {
   id: number;
   name: string;
-  description: string;
+  profession: string;
   position: any;
   user: any;
 }

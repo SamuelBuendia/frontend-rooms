@@ -1,0 +1,1 @@
+export { FunctionaryService } from './functionary.service';

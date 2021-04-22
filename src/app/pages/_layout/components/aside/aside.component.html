@@ -123,11 +123,11 @@
       </li>
       <!-- end::1 Level -->
 
-      <!-- begin::1 Level Employee -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_employee')">
-        <a class="menu-link" routerLink="/employees" routerLinkActive="active">
+      <!-- begin::1 Level Functionary -->
+      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_functionary')">
+        <a class="menu-link" routerLink="/functionarys" routerLinkActive="active">
           <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ 'EMPLOYEE.EMPLOYEES' | translate }}</span>
+          <span class="menu-text">{{ 'FUNCTIONARY.FUNCTIONARYS' | translate }}</span>
         </a>
       </li>
       <!-- end::1 Level -->

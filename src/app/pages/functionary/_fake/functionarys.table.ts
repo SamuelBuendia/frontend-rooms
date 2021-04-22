@@ -1,5 +1,5 @@
-export class EmployeesTable {
-  public static employees: any = [
+export class FunctionarysTable {
+  public static functionarys: any = [
     {
       id: 1,
       firstName: 'Sonni',

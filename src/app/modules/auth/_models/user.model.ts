@@ -21,7 +21,7 @@ export class UserModel extends AuthModel {
     website: string;
   }
   groups: any[];
-  employee: any;
+  functionary: any;
   companyName: string;
   // personal information
   first_name: string;

@@ -32,12 +32,12 @@ import { UserComponent } from './user/user.component';
 import { UserEditComponent } from './user/users/user-edit/user-edit.component';
 import { UserAutocompleteComponent } from './user/users/user-autocomplete/user-autocomplete.component';
 
-// Employees
-import { EmployeesComponent } from './employee/employees/employees.component';
-import { EmployeeComponent } from './employee/employee.component';
-import { EmployeeEditComponent } from './employee/employees/employee-edit/employee-edit.component';
-import { EmployeeAutocompleteComponent } from './employee/employees/employee-autocomplete/employee-autocomplete.component';
-import { EmployeeMultiselectComponent } from './employee/employees/employee-multiselect/employee-multiselect.component';
+// Functionarys
+import { FunctionarysComponent } from './functionary/functionarys/functionarys.component';
+import { FunctionaryComponent } from './functionary/functionary.component';
+import { FunctionaryEditComponent } from './functionary/functionarys/functionary-edit/functionary-edit.component';
+import { FunctionaryAutocompleteComponent } from './functionary/functionarys/functionary-autocomplete/functionary-autocomplete.component';
+import { FunctionaryMultiselectComponent } from './functionary/functionarys/functionary-multiselect/functionary-multiselect.component';
 
 @NgModule({
   imports: [
@@ -69,11 +69,11 @@ import { EmployeeMultiselectComponent } from './employee/employees/employee-mult
     UserComponent,
     UserEditComponent,
     UserAutocompleteComponent,
-    EmployeesComponent,
-    EmployeeComponent,
-    EmployeeEditComponent,
-    EmployeeAutocompleteComponent,
-    EmployeeMultiselectComponent
+    FunctionarysComponent,
+    FunctionaryComponent,
+    FunctionaryEditComponent,
+    FunctionaryAutocompleteComponent,
+    FunctionaryMultiselectComponent
   ]
 })
 export class PagesModule { }
