@@ -57,6 +57,7 @@ export class AuthService implements OnDestroy {
         console.error('err', err);
         return of(undefined);
       }),
+      finalize(() => this.isLoadingSubject.next(false))
     );
   }
 
@@ -77,7 +78,6 @@ export class AuthService implements OnDestroy {
       map((user: UserModel) => {
         return user;
       }),
-      finalize(() => this.isLoadingSubject.next(false))
     );
   }
 

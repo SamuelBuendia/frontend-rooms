@@ -8,6 +8,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { LogoutComponent } from './logout/logout.component';
 import { AuthComponent } from './auth.component';
 import { TranslationModule } from '../i18n/translation.module';
+import { ToastService } from '../toast/_services/toast.service';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,9 @@ import { TranslationModule } from '../i18n/translation.module';
     ForgotPasswordComponent,
     LogoutComponent,
     AuthComponent,
+  ],
+  providers: [
+    ToastService
   ],
   imports: [
     CommonModule,
