@@ -1,22 +1,22 @@
 import { Component, forwardRef, Renderer2, ViewChild, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { FunctionaryService as ModelsService } from '../../_services/functionary.service';
+import { RoomService as ModelsService } from '../../_services/room.service';
 import { LazyLoadEvent } from 'primeng/api';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
 export const EPANDED_TEXTAREA_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => FunctionaryAutocompleteComponent),
+    useExisting: forwardRef(() => RoomAutocompleteComponent),
     multi: true,
 };
 
 @Component({
-    selector: 'app-functionary-autocomplete',
-    templateUrl: './functionary-autocomplete.component.html',
-    styleUrls: ['./functionary-autocomplete.component.scss'],
+    selector: 'app-room-autocomplete',
+    templateUrl: './room-autocomplete.component.html',
+    styleUrls: ['./room-autocomplete.component.scss'],
     providers: [EPANDED_TEXTAREA_VALUE_ACCESSOR],
 })
-export class FunctionaryAutocompleteComponent implements ControlValueAccessor, OnInit {
+export class RoomAutocompleteComponent implements ControlValueAccessor, OnInit {
     @Input() model: any;
     @Input() valid: boolean;
     @Input() touched: boolean;
@@ -98,7 +98,7 @@ export class FunctionaryAutocompleteComponent implements ControlValueAccessor, O
         }
 
         if (event.query) {
-            this.filters.push({ key: 'filter{identification_number.icontains}', value: event.query })
+            this.filters.push({ key: 'filter{number_room.icontains}', value: event.query })
         } else {
             this.query = undefined;
         }
@@ -117,7 +117,7 @@ export class FunctionaryAutocompleteComponent implements ControlValueAccessor, O
     getModels() {
         this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).toPromise().then(
             response => {
-                this.models = response.functionaries;
+                this.models = response.rooms;
                 this.totalRecords = response.meta.total_results;
                 // if (this.model) {
                 //     if (this.model.id) {

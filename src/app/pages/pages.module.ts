@@ -39,6 +39,12 @@ import { FunctionaryEditComponent } from './functionary/functionarys/functionary
 import { FunctionaryAutocompleteComponent } from './functionary/functionarys/functionary-autocomplete/functionary-autocomplete.component';
 import { FunctionaryMultiselectComponent } from './functionary/functionarys/functionary-multiselect/functionary-multiselect.component';
 
+// Rooms
+import { RoomsComponent } from './room/rooms/rooms.component';
+import { RoomComponent } from './room/room.component';
+import { RoomEditComponent } from './room/rooms/room-edit/room-edit.component';
+import { RoomAutocompleteComponent } from './room/rooms/room-autocomplete/room-autocomplete.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -73,7 +79,11 @@ import { FunctionaryMultiselectComponent } from './functionary/functionarys/func
     FunctionaryComponent,
     FunctionaryEditComponent,
     FunctionaryAutocompleteComponent,
-    FunctionaryMultiselectComponent
+    FunctionaryMultiselectComponent,
+    RoomsComponent,
+    RoomComponent,
+    RoomEditComponent,
+    RoomAutocompleteComponent
   ]
 })
 export class PagesModule { }

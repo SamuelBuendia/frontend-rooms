@@ -42,83 +42,20 @@
       </li> -->
       <!-- end::1 Level -->
 
+      <!-- begin::1 Level Rooms -->
+      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_room')">
+        <a class="menu-link" routerLink="/rooms" routerLinkActive="active">
+          <span [inlineSVG]="'./assets/media/svg/icons/Code/Git2.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
+          <span class="menu-text">{{ 'ROOM.ROOMS' | translate }}</span>
+        </a>
+      </li>
+      <!-- end::1 Level -->
+
       <!-- begin::1 Level Users -->
       <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_user')">
         <a class="menu-link" routerLink="/users" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
+          <span [inlineSVG]="'./assets/media/svg/icons/Communication/Shield-user.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
           <span class="menu-text">{{ 'USER.USERS' | translate }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-
-      <!-- begin::1 Level Segment Company -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_segmentcompany')">
-        <a class="menu-link" routerLink="/segmentscompanies" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ 'SEGMENT_COMPANY.SEGMENTS_COMPANIES' | translate }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-    
-      <!-- begin::1 Level Type Company -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_typecompany')">
-        <a class="menu-link" routerLink="/typescompanies" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ 'TYPE_COMPANY.TYPES_COMPANIES' | translate }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-
-      <!-- begin::1 Level Company -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_company')">
-        <a class="menu-link" routerLink="/companies" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ 'COMPANY.COMPANIES' | translate }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-
-      <!-- begin::1 Level Office -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_office')">
-        <a class="menu-link" routerLink="/offices" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ 'OFFICE.OFFICES' | translate }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-
-      <!-- begin::1 Level TypeDivision -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_typedivision')">
-        <a class="menu-link" routerLink="/typesdivisions" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ 'TYPE_DIVISION.TYPES_DIVISIONS' | translate }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-      
-      <!-- begin::1 Level Division -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_division')">
-        <a class="menu-link" routerLink="/divisions" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ 'DIVISION.DIVISIONS' | translate }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-      
-      <!-- begin::1 Level Department -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_department')">
-        <a class="menu-link" routerLink="/departments" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ 'DEPARTMENT.DEPARTMENTS' | translate }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-    
-      <!-- begin::1 Level Position -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_position')">
-        <a class="menu-link" routerLink="/positions" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ 'POSITION.POSITIONS' | translate }}</span>
         </a>
       </li>
       <!-- end::1 Level -->
@@ -126,209 +63,12 @@
       <!-- begin::1 Level Functionary -->
       <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_functionary')">
         <a class="menu-link" routerLink="/functionarys" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
+          <span [inlineSVG]="'./assets/media/svg/icons/Communication/Add-user.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
           <span class="menu-text">{{ 'FUNCTIONARY.FUNCTIONARYS' | translate }}</span>
         </a>
       </li>
       <!-- end::1 Level -->
 
-      <!-- begin::1 Level Zone -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_zone')">
-        <a class="menu-link" routerLink="/zones" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ 'ZONE.ZONES' | translate }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-      
-      <!-- begin::1 Level TypeLocation -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_typelocation')">
-        <a class="menu-link" routerLink="/typeslocations" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ 'TYPE_LOCATION.TYPES_LOCATIONS' | translate }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-
-      <!-- begin::1 Level Location -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_location')">
-        <a class="menu-link" routerLink="/locations" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ 'LOCATION.LOCATIONS' | translate }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-
-      <!-- begin::1 Level TypeGuide -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_typeguide')">
-        <a class="menu-link" routerLink="/typesguides" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ 'TYPE_GUIDE.TYPES_GUIDES' | translate }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-
-      <!-- begin::1 Level Guide -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_guide')">
-        <a class="menu-link" routerLink="/guides" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ 'GUIDE.GUIDES' | translate }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-
-      <!-- begin::1 Level Guide -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_guideinput')">
-        <a class="menu-link" routerLink="/guidesinput" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ 'GUIDE.GUIDES_INPUTS' | translate }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-      
-      <!-- begin::1 Level Guide -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_guideoutput')">
-        <a class="menu-link" routerLink="/guidesoutput" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ 'GUIDE.GUIDES_OUTPUTS' | translate }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-
-      <!-- begin::1 Level Guide -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_guidecheck')">
-        <a class="menu-link" routerLink="/guidescheck" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ 'GUIDE.GUIDES_CHECKS' | translate }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-
-      <!-- begin::1 Level Voucher -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_voucher')">
-        <a class="menu-link" routerLink="/vouchers" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ 'VOUCHER.VOUCHERS' | translate }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-
-      <!-- begin::1 Level Packing -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_packing')">
-        <a class="menu-link" routerLink="/packings" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ 'PACKING.PACKINGS' | translate }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-
-      <!-- begin::1 Level DepositForm -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_depositform')">
-        <a class="menu-link" routerLink="/depositforms" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ 'DEPOSITFORM.DEPOSITFORMS' | translate }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-
-      <!-- begin::1 Level DepositFormDetail -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_depositformdetail')">
-        <a class="menu-link" routerLink="/depositformsdetails" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ 'DEPOSITFORMDETAIL.DEPOSITFORMSDETAILS' | translate }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-
-      <!-- begin::1 Level Package -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_currency')">
-        <a class="menu-link" routerLink="/currencies" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ 'CURRENCY.CURRENCIES' | translate }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-
-      <!-- begin::1 Level Package -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_typecurrency')">
-        <a class="menu-link" routerLink="/typescurrencies" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ 'TYPECURRENCY.TYPESCURRENCIES' | translate }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-
-      <!-- begin::1 Level Package -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_currencydetail')">
-        <a class="menu-link" routerLink="/currenciesdetails" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ 'CURRENCYDETAIL.CURRENCIESDETAILS' | translate }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-
-      <!-- begin::1 Level Package -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_exchange')">
-        <a class="menu-link" routerLink="/exchanges" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ 'EXCHANGE.EXCHANGES' | translate }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-
-      <!-- begin::1 Level Package -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_bankaccount')">
-        <a class="menu-link" routerLink="/banksaccounts" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ 'BANKACCOUNT.BANKSACCOUNTS' | translate }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-
-      <!-- begin::1 Level Package -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_contract')">
-        <a class="menu-link" routerLink="/contracts" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ 'CONTRACT.CONTRACTS' | translate }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-
-      <!-- begin::1 Level Package -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_companycontact')">
-        <a class="menu-link" routerLink="/companycontacts" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ 'COMPANYCONTACT.COMPANYCONTACTS' | translate }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-
-      <!-- begin::1 Level Moderation -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_moderatedobject')">
-        <a class="menu-link" routerLink="/moderations" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ 'MODERATION.MODERATIONS' | translate }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-
-      <!-- begin::1 Level Package -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_quotetemplate')">
-        <a class="menu-link" routerLink="/quotetemplates" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ 'QUOTETEMPLATE.QUOTETEMPLATES' | translate }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
-      
-      <!-- begin::1 Level Package -->
-      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_quotation')">
-        <a class="menu-link" routerLink="/quotations" routerLinkActive="active">
-          <span [inlineSVG]="'./assets/media/svg/icons/Home/Library.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
-          <span class="menu-text">{{ 'QUOTATION.QUOTATIONS' | translate }}</span>
-        </a>
-      </li>
-      <!-- end::1 Level -->
     </ul>
     <!-- end::Menu Nav -->
   </div>

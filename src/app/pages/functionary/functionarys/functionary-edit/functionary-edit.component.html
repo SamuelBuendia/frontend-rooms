@@ -42,7 +42,7 @@
       <div class="mt-5" *ngIf="model">
         <form action="#" class="form form-label-right" [formGroup]="formGroup">
           <div class="form-group row">
-            <div class="col-lg-4">
+            <div class="col-lg-4 mb-3">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'FUNCTIONARY.NAME' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 name="name" [class.is-invalid]="isControlInvalid('name')"
@@ -53,7 +53,93 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'name')">{{ 'FUNCTIONARY.NAME' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'name')">{{ 'FUNCTIONARY.NAME' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-4 mb-3">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'FUNCTIONARY.LAST_NAME' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="last_name" [class.is-invalid]="isControlInvalid('last_name')"
+                [class.is-valid]="isControlValid('last_name')" formControlName="last_name" />
+              <div class="feedback" *ngIf="!isControlTouched('last_name')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'FUNCTIONARY.LAST_NAME' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('last_name')">{{ 'FUNCTIONARY.LAST_NAME' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'last_name')">{{ 'FUNCTIONARY.LAST_NAME' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'last_name')">{{ 'FUNCTIONARY.LAST_NAME' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'last_name')">{{ 'FUNCTIONARY.LAST_NAME' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>
+            <div class="col-lg-4 mb-3">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'FUNCTIONARY.IDENTIFICATION_NUMBER' | translate }}</label>
+              <input type="number" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="identification_number" [class.is-invalid]="isControlInvalid('identification_number')"
+                [class.is-valid]="isControlValid('identification_number')" formControlName="identification_number" />
+              <div class="feedback" *ngIf="!isControlTouched('identification_number')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'FUNCTIONARY.IDENTIFICATION_NUMBER' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('identification_number')">{{ 'FUNCTIONARY.IDENTIFICATION_NUMBER' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'identification_number')">{{ 'FUNCTIONARY.IDENTIFICATION_NUMBER' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'identification_number')">{{ 'FUNCTIONARY.IDENTIFICATION_NUMBER' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'identification_number')">{{ 'FUNCTIONARY.IDENTIFICATION_NUMBER' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>
+            <div class="col-lg-4 mb-3">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'FUNCTIONARY.PHONE' | translate }}</label>
+              <input type="number" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="phone" [class.is-invalid]="isControlInvalid('phone')"
+                [class.is-valid]="isControlValid('phone')" formControlName="phone" />
+              <div class="feedback" *ngIf="!isControlTouched('phone')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'FUNCTIONARY.PHONE' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('phone')">{{ 'FUNCTIONARY.PHONE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'phone')">{{ 'FUNCTIONARY.PHONE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'phone')">{{ 'FUNCTIONARY.PHONE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'phone')">{{ 'FUNCTIONARY.PHONE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>
+            <div class="col-lg-4 mb-3">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'FUNCTIONARY.MOBILE' | translate }}</label>
+              <input type="number" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="mobile" [class.is-invalid]="isControlInvalid('mobile')"
+                [class.is-valid]="isControlValid('mobile')" formControlName="mobile" />
+              <div class="feedback" *ngIf="!isControlTouched('mobile')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'FUNCTIONARY.MOBILE' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('mobile')">{{ 'FUNCTIONARY.MOBILE' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'mobile')">{{ 'FUNCTIONARY.MOBILE' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'mobile')">{{ 'FUNCTIONARY.MOBILE' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'mobile')">{{ 'FUNCTIONARY.MOBILE' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>
+            <div class="col-lg-4 mb-3">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'FUNCTIONARY.ADDRESS' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="address" [class.is-invalid]="isControlInvalid('address')"
+                [class.is-valid]="isControlValid('address')" formControlName="address" />
+              <div class="feedback" *ngIf="!isControlTouched('address')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'FUNCTIONARY.ADDRESS' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('address')">{{ 'FUNCTIONARY.ADDRESS' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'address')">{{ 'FUNCTIONARY.ADDRESS' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'address')">{{ 'FUNCTIONARY.ADDRESS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'address')">{{ 'FUNCTIONARY.ADDRESS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>
+            <div class="col-lg-4 mb-3">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'FUNCTIONARY.INSTITUTIONAL_EMAIL' | translate }}</label>
+              <input type="email" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="institutional_email" [class.is-invalid]="isControlInvalid('institutional_email')"
+                [class.is-valid]="isControlValid('institutional_email')" formControlName="institutional_email" />
+              <div class="feedback" *ngIf="!isControlTouched('institutional_email')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'FUNCTIONARY.INSTITUTIONAL_EMAIL' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('institutional_email')">{{ 'FUNCTIONARY.INSTITUTIONAL_EMAIL' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'institutional_email')">{{ 'FUNCTIONARY.INSTITUTIONAL_EMAIL' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'institutional_email')">{{ 'FUNCTIONARY.INSTITUTIONAL_EMAIL' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'institutional_email')">{{ 'FUNCTIONARY.INSTITUTIONAL_EMAIL' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>
+            <div class="col-lg-4 mb-3">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'FUNCTIONARY.PERSONAL_EMAIL' | translate }}</label>
+              <input type="email" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="personal_email" [class.is-invalid]="isControlInvalid('personal_email')"
+                [class.is-valid]="isControlValid('personal_email')" formControlName="personal_email" />
+              <div class="feedback" *ngIf="!isControlTouched('personal_email')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'FUNCTIONARY.PERSONAL_EMAIL' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('personal_email')">{{ 'FUNCTIONARY.PERSONAL_EMAIL' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'personal_email')">{{ 'FUNCTIONARY.PERSONAL_EMAIL' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'personal_email')">{{ 'FUNCTIONARY.PERSONAL_EMAIL' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'personal_email')">{{ 'FUNCTIONARY.PERSONAL_EMAIL' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>
+            <div class="col-lg-4 mb-3">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'FUNCTIONARY.BIRTH_DATE' | translate}}</label>
+              <p-calendar [inputStyleClass]="getValidClass(isControlValid('birth_date'))" name="birth_date" formControlName="birth_date"></p-calendar>
+              <div class="feedback" *ngIf="!isControlTouched('birth_date')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'FUNCTIONARY.BIRTH_DATE' | translate}}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('birth_date')">{{ 'FUNCTIONARY.BIRTH_DATE' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'birth_date')">{{ 'FUNCTIONARY.BIRTH_DATE' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'birth_date')">{{ 'FUNCTIONARY.BIRTH_DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'birth_date')">{{ 'FUNCTIONARY.BIRTH_DATE' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>   
+            <div class="col-lg-4 mb-3">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'FUNCTIONARY.PROFESSION' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
                 name="profession" [class.is-invalid]="isControlInvalid('profession')"
@@ -64,7 +150,16 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'profession')">{{ 'FUNCTIONARY.PROFESSION' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'profession')">{{ 'FUNCTIONARY.PROFESSION' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-4 mb-3">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'FUNCTIONARY.ACTIVE' | translate}}</label>
+              <p-toggleButton class="form-control form-control-lg form-control-solid" formControlName="active" onLabel="{{ 'COMMON.YES' | translate}}" offLabel="{{ 'COMMON.NO' | translate}}"></p-toggleButton>
+              <div class="feedback" *ngIf="!isControlTouched('active')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'FUNCTIONARY.ACTIVE' | translate}}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('active')">{{ 'FUNCTIONARY.ACTIVE' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'active')">{{ 'FUNCTIONARY.ACTIVE' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'active')">{{ 'FUNCTIONARY.ACTIVE' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'active')">{{ 'FUNCTIONARY.ACTIVE' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
+            </div>
+            <div class="col-lg-4 mb-3">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'FUNCTIONARY.USER' | translate }}</label>
               <app-user-autocomplete
               placeholder="{{ 'FUNCTIONARY.USER' | translate }}" name="user" [valid]="isControlValid('user')" [touched]="isControlTouched('user')" [class.is-invalid]="isControlInvalid('user')"

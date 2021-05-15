@@ -19,7 +19,7 @@ export class DropdownMenu1Component implements OnInit {
   }
 
   ngOnInit(): void {
-    this.divisions = this.authService.currentUserValue.functionary.divisions;
+    this.divisions = this.authService.currentUserValue.functionary;
 
   }
 

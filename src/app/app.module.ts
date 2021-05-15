@@ -28,6 +28,7 @@ import { authInterceptorProviders } from './modules/auth/_helpers/auth.intercept
 import { UserService } from './pages/user/_services';
 import { ConfirmationService } from 'primeng/api';
 import { FunctionaryService } from './pages/functionary/_services';
+import { RoomService } from './pages/room/_services';
 
 function appInitializer(authService: AuthService) {
   return () => {
@@ -90,6 +91,7 @@ export function getHighlightLanguages() {
     UserService,
     ConfirmationService,
     FunctionaryService,
+    RoomService
   ],
   bootstrap: [AppComponent],
 })

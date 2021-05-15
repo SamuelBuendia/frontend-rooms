@@ -48,6 +48,13 @@ const routes: Routes = [
             (m) => m.FunctionaryRoutingModule
           ),
       },
+      {
+        path: 'rooms',
+        loadChildren: () =>
+          import('../pages/room/room-routing.module').then(
+            (m) => m.RoomRoutingModule
+          ),
+      },
     ],
   },
 ];

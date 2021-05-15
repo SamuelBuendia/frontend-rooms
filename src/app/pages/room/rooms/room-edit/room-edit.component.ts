@@ -5,15 +5,15 @@ import { Observable, of, Subscription } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
-import { FunctionaryModel as Model } from '../../_models/functionary.model';
-import { FunctionaryService as ModelsService } from '../../_services/functionary.service';
+import { RoomModel as Model } from '../../_models/room.model';
+import { RoomService as ModelsService } from '../../_services/room.service';
 
 @Component({
-  selector: 'app-functionary-edit',
-  templateUrl: './functionary-edit.component.html',
-  styleUrls: ['./functionary-edit.component.scss']
+  selector: 'app-room-edit',
+  templateUrl: './room-edit.component.html',
+  styleUrls: ['./room-edit.component.scss']
 })
-export class FunctionaryEditComponent implements OnInit, OnDestroy {
+export class RoomEditComponent implements OnInit, OnDestroy {
   public id: number;
   public model: Model;
   public previous: Model;
@@ -25,18 +25,12 @@ export class FunctionaryEditComponent implements OnInit, OnDestroy {
   };
 
   public name: AbstractControl;
-  public last_name: AbstractControl;
-  public identification_number: AbstractControl;
-  public phone: AbstractControl;
-  public mobile: AbstractControl;
-  public address: AbstractControl;
-  public institutional_email: AbstractControl;
-  public personal_email: AbstractControl;
-  public birth_date: AbstractControl;
-  public profession: AbstractControl;
+  public number_room: AbstractControl;
+  public description: AbstractControl;
   public active: AbstractControl;
-  public user: AbstractControl;
-
+  public functionary: AbstractControl;
+  public room_fk: AbstractControl;
+   
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
 
@@ -55,30 +49,18 @@ export class FunctionaryEditComponent implements OnInit, OnDestroy {
 
     this.formGroup = this.fb.group({
       name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      last_name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      identification_number: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      phone: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      mobile: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      address: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      institutional_email: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      personal_email: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      birth_date: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      profession: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      number_room: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      description: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       active: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      user: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(30)])],
+      functionary: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(30)])],
+      room_fk: [''],
     });
     this.name = this.formGroup.controls['name'];
-    this.last_name = this.formGroup.controls['last_name'];
-    this.identification_number = this.formGroup.controls['identification_number'];
-    this.phone = this.formGroup.controls['phone'];
-    this.mobile = this.formGroup.controls['mobile'];
-    this.address = this.formGroup.controls['address'];
-    this.institutional_email = this.formGroup.controls['institutional_email'];
-    this.personal_email = this.formGroup.controls['personal_email'];
-    this.birth_date = this.formGroup.controls['birth_date'];
-    this.profession = this.formGroup.controls['profession'];
+    this.number_room = this.formGroup.controls['number_room'];
+    this.description = this.formGroup.controls['description'];
     this.active = this.formGroup.controls['active'];
-    this.user = this.formGroup.controls['user'];
+    this.functionary = this.formGroup.controls['functionary'];
+    this.room_fk = this.formGroup.controls['room_fk'];
   }
 
   ngOnInit(): void {
@@ -97,7 +79,7 @@ export class FunctionaryEditComponent implements OnInit, OnDestroy {
         if (this.id || this.id > 0) {
           return this.modelsService.getById(this.id);
         }
-        return of({ 'functionary': new Model() });
+        return of({ 'room': new Model() });
       }),
       catchError((error) => {
         this.requesting = false;
@@ -110,14 +92,18 @@ export class FunctionaryEditComponent implements OnInit, OnDestroy {
         Object.entries(messageError).forEach(
           ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
-        return of({ 'functionary': new Model() });
+        return of({ 'room': new Model() });
       }),
     ).subscribe((response: any) => {
       this.requesting = false;
       if (response) {
-        this.model = response.functionary;
-        if (response.users) {
-          this.model.user = response.users[0];
+        this.model = response.room;
+        if (response.functionaries) {
+          this.model.functionary = response.functionaries[0];
+        }
+        let rooms = response['+rooms'];
+        if (rooms) {
+          this.model.room_fk = rooms[0];
         }
         this.previous = Object.assign({}, this.model);
         this.loadForm();
@@ -129,18 +115,14 @@ export class FunctionaryEditComponent implements OnInit, OnDestroy {
   loadForm() {
     if (this.model.id) {
       this.name.setValue(this.model.name);
-      this.last_name.setValue(this.model.last_name);
-      this.identification_number.setValue(this.model.identification_number);
-      this.phone.setValue(this.model.phone);
-      this.mobile.setValue(this.model.mobile);
-      this.address.setValue(this.model.address);
-      this.institutional_email.setValue(this.model.institutional_email);
-      this.personal_email.setValue(this.model.personal_email);
-      this.birth_date.setValue(new Date(this.model.birth_date));
-      this.profession.setValue(this.model.profession);
+      this.number_room.setValue(this.model.number_room);
+      this.description.setValue(this.model.description);
       this.active.setValue(this.model.active);
-      if (this.model.user) {
-        this.user.setValue(this.model.user);
+      if (this.model.functionary) {
+        this.functionary.setValue(this.model.functionary);
+      }
+      if (this.model.room_fk) {
+        this.room_fk.setValue(this.model.room_fk);
       }
     }
     this.formGroup.markAllAsTouched();
@@ -170,17 +152,19 @@ export class FunctionaryEditComponent implements OnInit, OnDestroy {
   edit() {
     this.requesting = true;
     let model = this.model;
-    model.birth_date = this.formatDate(this.birth_date.value);
     model.active = this.model.active;
-    if (this.model.user) {
-      model.user = this.model.user.id;
+    if (this.model.functionary) {
+      model.functionary = this.model.functionary.id;
+    }
+    if (this.model.room_fk) {
+      model.room_fk = this.model.room_fk.id;
     }
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
-          this.router.navigate(['/functionarys']);
+          this.router.navigate(['/rooms']);
         }
       }),
       catchError((error) => {
@@ -198,7 +182,7 @@ export class FunctionaryEditComponent implements OnInit, OnDestroy {
       })
     ).subscribe(response => {
       this.requesting = false;
-      this.model = response.functionary
+      this.model = response.room
     });
     this.subscriptions.push(sbUpdate);
   }
@@ -209,20 +193,17 @@ export class FunctionaryEditComponent implements OnInit, OnDestroy {
     let model = this.model;
     model.active = this.active.value;
 
-    model.birth_date = undefined;
-    if (this.birth_date.value) {
-      model.birth_date = this.formatDate(this.birth_date.value);
+    if (this.model.functionary) {
+      model.functionary = this.model.functionary.id;
     }
 
-    if (this.model.user) {
-      model.user = this.model.user.id;
-    }
-
+    model.room_fk = this.model.room_fk.id;
+    
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
-          this.router.navigate(['/functionarys']);
+          this.router.navigate(['/rooms']);
         } else {
           this.formGroup.reset()
         }
@@ -242,7 +223,7 @@ export class FunctionaryEditComponent implements OnInit, OnDestroy {
       })
     ).subscribe(response => {
       this.requesting = false;
-      this.model = response.functionary as Model
+      this.model = response.room as Model
     });
     this.subscriptions.push(sbCreate);
   }
