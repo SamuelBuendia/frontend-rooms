@@ -85,6 +85,16 @@ export const locale = {
       ACTIVE: 'Activo',
       USER: 'Usuario',
     },
+    SPACE: {
+      SPACE: 'Espacio',
+      SPACES: 'Espacios',
+      ID: 'Id',
+      NAME: 'Nombre Espacio',
+      NUMBER_ROOM: 'Número Espacio',
+      DESCRIPTION: 'Descripción',
+      ACTIVE: 'Activo',
+      FUNCTIONARY: 'Encargado',
+    },
     ROOM: {
       ROOM: 'Sala',
       ROOMS: 'Salas',

@@ -49,6 +49,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'spaces',
+        loadChildren: () =>
+          import('../pages/space/space-routing.module').then(
+            (m) => m.SpaceRoutingModule
+          ),
+      },
+      {
         path: 'rooms',
         loadChildren: () =>
           import('../pages/room/room-routing.module').then(

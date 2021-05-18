@@ -39,6 +39,12 @@ import { FunctionaryEditComponent } from './functionary/functionarys/functionary
 import { FunctionaryAutocompleteComponent } from './functionary/functionarys/functionary-autocomplete/functionary-autocomplete.component';
 import { FunctionaryMultiselectComponent } from './functionary/functionarys/functionary-multiselect/functionary-multiselect.component';
 
+// Spaces
+import { SpacesComponent } from './space/spaces/spaces.component';
+import { SpaceComponent } from './space/space.component';
+import { SpaceEditComponent } from './space/spaces/space-edit/space-edit.component';
+import { SpaceAutocompleteComponent } from './space/spaces/space-autocomplete/space-autocomplete.component';
+
 // Rooms
 import { RoomsComponent } from './room/rooms/rooms.component';
 import { RoomComponent } from './room/room.component';
@@ -80,10 +86,14 @@ import { RoomAutocompleteComponent } from './room/rooms/room-autocomplete/room-a
     FunctionaryEditComponent,
     FunctionaryAutocompleteComponent,
     FunctionaryMultiselectComponent,
+    SpacesComponent,
+    SpaceComponent,
+    SpaceEditComponent,
+    SpaceAutocompleteComponent,
     RoomsComponent,
     RoomComponent,
     RoomEditComponent,
-    RoomAutocompleteComponent
+    RoomAutocompleteComponent,
   ]
 })
 export class PagesModule { }

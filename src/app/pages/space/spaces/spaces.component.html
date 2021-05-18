@@ -4,7 +4,7 @@
       <h3 class="card-label">{{ 'COMMON.LIST' | translate }}</h3>
     </div>
     <div class="card-toolbar">
-      <a type="button" class="btn btn-primary" routerLink="/rooms/add">{{ 'COMMON.NEW' | translate }}</a>
+      <a type="button" class="btn btn-primary" routerLink="/spaces/add">{{ 'COMMON.NEW' | translate }}</a>
     </div>
   </div>
   <div class="card-body">
@@ -26,7 +26,7 @@
     <p-table #dt [value]="models" [(selection)]="selectedModels" dataKey="id" styleClass="p-datatable-striped p-datatable-sm" [rowHover]="true"
     [rows]="per_page" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,25,50,100]"
     [paginator]="true" currentPageReportTemplate="{{ 'COMMON.SHOWING' | translate }} {{ 'COMMON.FROM' | translate }} {first} {{ 'COMMON.TO' | translate }} {last} {{ 'COMMON.OF' | translate }} {totalRecords} {{ 'COMMON.RECORDS' | translate }}"
-    [filterDelay]="1000" [globalFilterFields]="['id','number_room']" [lazy]="true" (onLazyLoad)="loadLazy($event)"
+    [filterDelay]="1000" [globalFilterFields]="['id','number_space']" [lazy]="true" (onLazyLoad)="loadLazy($event)"
     [totalRecords]="totalRecords" [showJumpToPageDropdown]="false" [minBufferPx]="1" [showLoader]="true" [loading]="requesting">
       <ng-template pTemplate="header">
         <tr>
@@ -43,7 +43,7 @@
               {{ 'ROOM.NAME' | translate }} 
             </div>
           </th>
-          <th pSortableColumn="number_room">
+          <th pSortableColumn="number_space">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'ROOM.NUMBER_ROOM' | translate }}
             </div>
@@ -81,7 +81,7 @@
             {{value.name}}
           </td>
           <td>
-            {{value.number_room}}
+            {{value.number_space}}
           </td>
           <td>
             {{value.functionary.name}}
@@ -91,13 +91,13 @@
           </td>
           <td style="text-align: right">
             <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
-              [routerLink]="'/rooms/edit/' + value.id"  *ngIf="authService.hasPermission('add_room')">
+              [routerLink]="'/spaces/edit/' + value.id"  *ngIf="authService.hasPermission('add_space')">
               <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-primary">
               </span>
             </a>
             <a title="{{ 'COMMON.DELETE' | translate }}" class="btn btn-icon btn-light btn-hover-danger btn-sm"
-              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('change_room')">
+              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('change_space')">
               <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-danger">
               </span>
@@ -116,25 +116,3 @@
 </div>
 
 <p-confirmDialog header="{{ 'COMMON.CONFIRMATION' | translate }}" icon="pi pi-exclamation-triangle" [position]="confirmDialogPosition"></p-confirmDialog>
-
-<div class="card card-custom" id="kt_card_3">
-  <div class="card-header">
-   <div class="card-title">
-    <h3 class="card-label">Card Title</h3>
-   </div>
-   <div class="card-toolbar">
-    <a href="#" class="btn btn-icon btn-circle btn-sm btn-light-primary mr-1" data-card-tool="toggle">
-    <i class="ki ki-arrow-down icon-nm"></i>
-    </a>
-    <a href="#" class="btn btn-icon btn-circle btn-sm btn-light-success mr-1" data-card-tool="reload">
-    <i class="ki ki-reload icon-nm"></i>
-    </a>
-    <a href="#" class="btn btn-icon btn-circle btn-sm btn-light-danger" data-card-tool="remove">
-    <i class="ki ki-close icon-nm"></i>
-    </a>
-   </div>
-  </div>
-  <div class="card-body">
-   ...
-  </div>
- </div>
