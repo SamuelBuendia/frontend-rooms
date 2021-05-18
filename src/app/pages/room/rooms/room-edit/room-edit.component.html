@@ -99,7 +99,7 @@
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'ROOM.SPACE' | translate}}</label>
               <app-space-autocomplete
               name="space" [valid]="isControlValid('space')" [touched]="isControlTouched('space')" [class.is-invalid]="isControlInvalid('space')"
-              [class.is-valid]="isControlValid('space')" formControlName="space" id="space" [model]="model.space"></app-space-autocomplete>
+              [class.is-valid]="isControlValid('space')" formControlName="space" id="space" [model]="model.space" [disabled]="model && model.id"></app-space-autocomplete>
               <div class="feedback" *ngIf="!isControlTouched('space')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'ROOM.SPACE' | translate}}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('space')">{{ 'ROOM.SPACE' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'space')">{{ 'ROOM.SPACE' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
@@ -108,7 +108,7 @@
             </div>  
           </div>
           <div class="float-right">
-            <a class="btn btn-default font-weight-bold mr-2" routerLink="/rooms">{{ 'COMMON.CANCEL' | translate }}</a>
+            <a class="btn btn-default font-weight-bold mr-2" routerLink="{{parent}}/rooms">{{ 'COMMON.CANCEL' | translate }}</a>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"
               [disabled]="formGroup.invalid" (click)="save(false)">{{ 'COMMON.SAVE' | translate }}</button>
             <button type="submit" class="btn btn-primary font-weight-bold mr-2"

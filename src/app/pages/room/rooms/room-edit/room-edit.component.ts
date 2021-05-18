@@ -7,6 +7,7 @@ import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
 import { RoomModel as Model } from '../../_models/room.model';
 import { RoomService as ModelsService } from '../../_services/room.service';
+import { SpaceService } from 'src/app/pages/space/_services';
 
 @Component({
   selector: 'app-room-edit',
@@ -36,12 +37,16 @@ export class RoomEditComponent implements OnInit, OnDestroy {
 
   public saveAndExit;
 
+  public spaceId: number;
+  public parent: string;
+
   constructor(
     private fb: FormBuilder,
     private modelsService: ModelsService,
     private router: Router,
     private route: ActivatedRoute,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private spaceService: SpaceService,
   ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info | 1 => Profile
     this.saveAndExit = false;
@@ -67,7 +72,15 @@ export class RoomEditComponent implements OnInit, OnDestroy {
     this.id = undefined;
     this.model = undefined;
     this.previous = undefined;
-    this.get();
+
+    this.route.parent.parent.parent.params.subscribe((params) => {
+      if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
+        this.spaceId = params.id;
+        this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.spaceId;
+      }
+      this.get();
+    });
+
   }
 
   get() {
@@ -124,6 +137,10 @@ export class RoomEditComponent implements OnInit, OnDestroy {
       if (this.model.space) {
         this.space.setValue(this.model.space);
       }
+    } else {
+      if (this.spaceId) {
+        this.GetSpaceById(this.spaceId);
+      }
     }
     this.formGroup.markAllAsTouched();
   }
@@ -164,7 +181,11 @@ export class RoomEditComponent implements OnInit, OnDestroy {
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
-          this.router.navigate(['/rooms']);
+          if(this.parent){
+            this.router.navigate([this.parent + '/rooms']);
+          } else {
+            this.router.navigate(['/rooms']);
+          }
         }
       }),
       catchError((error) => {
@@ -203,7 +224,11 @@ export class RoomEditComponent implements OnInit, OnDestroy {
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
-          this.router.navigate(['/rooms']);
+          if(this.parent){
+            this.router.navigate([this.parent + '/rooms']);
+          } else {
+            this.router.navigate(['/rooms']);
+          }
         } else {
           this.formGroup.reset()
         }
@@ -296,5 +321,16 @@ export class RoomEditComponent implements OnInit, OnDestroy {
     }
 
     return [year, month, day].join('-');
+  }
+
+  GetSpaceById(id) {
+    this.spaceService.getById(id).toPromise().then(
+      response => {
+        this.space.setValue(response.space)
+      },
+      error => {
+        console.log('error getting space');
+      }
+    );
   }
 }

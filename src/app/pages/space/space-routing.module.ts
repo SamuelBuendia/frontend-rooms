@@ -20,7 +20,16 @@ const routes: Routes = [
       },
       {
         path: 'edit/:id',
-        component: SpaceEditComponent
+        component: SpaceEditComponent,
+        children: [
+          {
+            path: 'rooms',
+            loadChildren: () =>
+              import('../../pages/room/room-routing.module').then(
+                (m) => m.RoomRoutingModule
+              ),
+          },
+        ]
       },
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: '**', redirectTo: 'list', pathMatch: 'full' },

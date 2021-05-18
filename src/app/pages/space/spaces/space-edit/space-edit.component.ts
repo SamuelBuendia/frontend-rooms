@@ -22,6 +22,7 @@ export class SpaceEditComponent implements OnInit, OnDestroy {
 
   public tabs = {
     BASIC_TAB: 0,
+    ROOMS_TAB: 1,
   };
 
   public name: AbstractControl;
@@ -35,11 +36,14 @@ export class SpaceEditComponent implements OnInit, OnDestroy {
 
   public saveAndExit;
 
+  public parent: string;
+
   constructor(
     private fb: FormBuilder,
     private modelsService: ModelsService,
     private router: Router,
     private route: ActivatedRoute,
+    public authService: AuthService,
     private toastService: ToastService
   ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info | 1 => Profile
@@ -58,12 +62,19 @@ export class SpaceEditComponent implements OnInit, OnDestroy {
     this.description = this.formGroup.controls['description'];
     this.active = this.formGroup.controls['active'];
     this.functionary = this.formGroup.controls['functionary'];
+
+    this.parent = '/spaces';
   }
 
   ngOnInit(): void {
     this.id = undefined;
     this.model = undefined;
     this.previous = undefined;
+
+    if (this.route.parent.parent.snapshot.url[0].path) {
+      this.parent = '/' + this.route.parent.parent.snapshot.url[0].path;
+    }
+
     this.get();
   }
 

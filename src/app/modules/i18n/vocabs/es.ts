@@ -94,6 +94,7 @@ export const locale = {
       DESCRIPTION: 'Descripción',
       ACTIVE: 'Activo',
       FUNCTIONARY: 'Encargado',
+      ROOMS: 'Salas'
     },
     ROOM: {
       ROOM: 'Sala',

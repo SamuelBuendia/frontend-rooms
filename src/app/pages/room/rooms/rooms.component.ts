@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RoomService as ModelService } from '../_services/room.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RoomModel as Model } from '../_models/room.model';
 import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
@@ -46,9 +47,14 @@ export class RoomsComponent implements OnInit {
 
     public showTableCheckbox: boolean;
 
+    public spaceId: number;
+    public parent: string;
+
     constructor(
         public modelsService: ModelService,
         public translate: TranslateService,
+        private router: Router,
+        private route: ActivatedRoute,
         private confirmationService: ConfirmationService,
         private toastService: ToastService,
         public authService: AuthService,
@@ -71,6 +77,7 @@ export class RoomsComponent implements OnInit {
         });
 
         this.showTableCheckbox = false;
+        this.parent = '';
 
         this.page = 1;
         this.total_page = 0;
@@ -93,28 +100,43 @@ export class RoomsComponent implements OnInit {
         this._with.push({key: 'include[]', value: 'functionary.*'})
     }
 
-    public loadLazy(event: LazyLoadEvent) {
-        this.page = (event.first / this.per_page) + 1;
-        if (event.sortField) {
-            if (event.sortOrder === -1) {
-                this.sort = '-' + event.sortField;
+    public loadLazy(event?: LazyLoadEvent) {
+        if (event) {
+            this.page = (event.first / this.per_page) + 1;
+            if (event.sortField) {
+                if (event.sortOrder === -1) {
+                    this.sort = '-' + event.sortField;
+                } else {
+                    this.sort = event.sortField;
+                }
             } else {
-                this.sort = event.sortField;
+                this.sort = '-id';
             }
-        } else {
-            this.sort = '-id';
+
+            if (event.globalFilter) {
+                this.query = event.globalFilter;
+            } else {
+                this.query = undefined;
+            }
+
+            if (event.rows) {
+                this.per_page = event.rows;
+            }    
         }
 
-        if (event.globalFilter) {
-            this.query = event.globalFilter;
+        this.filters = [];
+        if (this.route.parent.parent.parent.snapshot.url.length > 0) {
+            this.route.parent.parent.parent.params.subscribe((params) => {
+                if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
+                    this.spaceId = params.id;
+                    this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.spaceId;
+                    this.filters.push({ key: 'filter{space}', value: this.spaceId.toString() })
+                }
+                this.getModels();
+            });
         } else {
-            this.query = undefined;
+            this.getModels();
         }
-
-        if (event.rows) {
-            this.per_page = event.rows;
-        }
-        this.getModels();
     }
 
     public getModels() {
