@@ -29,7 +29,7 @@ export class RoomEditComponent implements OnInit, OnDestroy {
   public description: AbstractControl;
   public active: AbstractControl;
   public functionary: AbstractControl;
-  public room_fk: AbstractControl;
+  public space: AbstractControl;
    
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
@@ -53,14 +53,14 @@ export class RoomEditComponent implements OnInit, OnDestroy {
       description: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       active: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       functionary: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(30)])],
-      room_fk: [''],
+      space: [''],
     });
     this.name = this.formGroup.controls['name'];
     this.number_room = this.formGroup.controls['number_room'];
     this.description = this.formGroup.controls['description'];
     this.active = this.formGroup.controls['active'];
     this.functionary = this.formGroup.controls['functionary'];
-    this.room_fk = this.formGroup.controls['room_fk'];
+    this.space = this.formGroup.controls['space'];
   }
 
   ngOnInit(): void {
@@ -101,9 +101,9 @@ export class RoomEditComponent implements OnInit, OnDestroy {
         if (response.functionaries) {
           this.model.functionary = response.functionaries[0];
         }
-        let rooms = response['+rooms'];
-        if (rooms) {
-          this.model.room_fk = rooms[0];
+        // let rooms = response['+rooms'];
+        if (response.spaces) {
+          this.model.space = response.spaces[0];
         }
         this.previous = Object.assign({}, this.model);
         this.loadForm();
@@ -121,8 +121,8 @@ export class RoomEditComponent implements OnInit, OnDestroy {
       if (this.model.functionary) {
         this.functionary.setValue(this.model.functionary);
       }
-      if (this.model.room_fk) {
-        this.room_fk.setValue(this.model.room_fk);
+      if (this.model.space) {
+        this.space.setValue(this.model.space);
       }
     }
     this.formGroup.markAllAsTouched();
@@ -156,8 +156,8 @@ export class RoomEditComponent implements OnInit, OnDestroy {
     if (this.model.functionary) {
       model.functionary = this.model.functionary.id;
     }
-    if (this.model.room_fk) {
-      model.room_fk = this.model.room_fk.id;
+    if (this.model.space) {
+      model.space = this.model.space.id;
     }
 
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
@@ -197,7 +197,7 @@ export class RoomEditComponent implements OnInit, OnDestroy {
       model.functionary = this.model.functionary.id;
     }
 
-    model.room_fk = this.model.room_fk.id;
+    model.space = this.model.space.id;
     
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {

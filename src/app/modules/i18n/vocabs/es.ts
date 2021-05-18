@@ -104,7 +104,7 @@ export const locale = {
       DESCRIPTION: 'Descripción',
       ACTIVE: 'Activo',
       FUNCTIONARY: 'Encargado',
-      ROOM_FK: 'Pertenece a',
+      SPACE: 'Espacio',
     },
     COMMON: {
       ID: 'ID',

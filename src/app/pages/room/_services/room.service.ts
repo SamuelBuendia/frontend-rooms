@@ -66,6 +66,6 @@ export class RoomService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=functionary.*&include[]=room_fk.*`);
+        return this.http.get(`${this.API_URL}/${id}/?include[]=functionary.*&include[]=space.*`);
     }
 }

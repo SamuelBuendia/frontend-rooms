@@ -88,6 +88,9 @@ export class SpacesComponent implements OnInit {
 
     ngOnInit() {
         this.requesting = false;
+
+        this._with = [];
+        this._with.push({key: 'include[]', value: 'functionary.*'})
     }
 
     public loadLazy(event: LazyLoadEvent) {
@@ -122,6 +125,15 @@ export class SpacesComponent implements OnInit {
             response => {
                 this.requesting = false;
                 this.models = response.spaces;
+                if(response.functionaries){
+                    response.functionaries.forEach(functionary => {
+                        this.models.forEach(element => {
+                            if (element.functionary === functionary.id) {
+                                element.functionary = functionary;
+                            }
+                        });
+                    });
+                }
                 this.totalRecords = response.meta.total_results;
             },
             error => {

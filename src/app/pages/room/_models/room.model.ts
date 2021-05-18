@@ -7,5 +7,5 @@ export class RoomModel {
   description: string;
   active: string;
   functionary: any;
-  room_fk: any;
+  space: any;
 }

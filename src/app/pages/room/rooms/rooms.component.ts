@@ -88,6 +88,9 @@ export class RoomsComponent implements OnInit {
 
     ngOnInit() {
         this.requesting = false;
+
+        this._with = [];
+        this._with.push({key: 'include[]', value: 'functionary.*'})
     }
 
     public loadLazy(event: LazyLoadEvent) {
@@ -111,8 +114,6 @@ export class RoomsComponent implements OnInit {
         if (event.rows) {
             this.per_page = event.rows;
         }
-
-
         this.getModels();
     }
 
@@ -121,7 +122,20 @@ export class RoomsComponent implements OnInit {
         this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).toPromise().then(
             response => {
                 this.requesting = false;
-                this.models = response.rooms;
+                // this.models = response.rooms;
+                this.models = [];
+                response.rooms.forEach(element => {
+                    this.models.push(element);
+                });
+                if(response.functionaries){
+                    response.functionaries.forEach(functionary => {
+                        this.models.forEach(element => {
+                            if (element.functionary === functionary.id) {
+                                element.functionary = functionary;
+                            }
+                        });
+                    });
+                }
                 this.totalRecords = response.meta.total_results;
             },
             error => {
