@@ -58,7 +58,7 @@ export class RoomEditComponent implements OnInit, OnDestroy {
       description: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       active: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       functionary: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(30)])],
-      space: [''],
+      space: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(30)])],
     });
     this.name = this.formGroup.controls['name'];
     this.number_room = this.formGroup.controls['number_room'];
@@ -126,6 +126,8 @@ export class RoomEditComponent implements OnInit, OnDestroy {
   }
 
   loadForm() {
+    this.active.setValue(true);
+    
     if (this.model.id) {
       this.name.setValue(this.model.name);
       this.number_room.setValue(this.model.number_room);

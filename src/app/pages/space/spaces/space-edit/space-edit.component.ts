@@ -118,6 +118,8 @@ export class SpaceEditComponent implements OnInit, OnDestroy {
   }
 
   loadForm() {
+    this.active.setValue(true);
+    
     if (this.model.id) {
       this.name.setValue(this.model.name);
       this.number_space.setValue(this.model.number_space);
