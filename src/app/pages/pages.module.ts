@@ -16,6 +16,7 @@ import { BadgeModule } from 'primeng/badge';
 import { ChipsModule } from 'primeng/chips';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { EditorModule } from 'primeng/editor';
+import { FieldsetModule } from 'primeng/fieldset';
 
 import { ImageCropperModule } from 'ngx-image-cropper';
 
@@ -63,6 +64,7 @@ import { RoomAutocompleteComponent } from './room/rooms/room-autocomplete/room-a
     ChipsModule,
     MultiSelectModule,
     EditorModule,
+    FieldsetModule,
     CurrencyMaskModule,
     ToggleButtonModule,
     CalendarModule,
