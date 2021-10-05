@@ -35,7 +35,7 @@ export class UserService {
         }
 
         if (query !== null && query !== undefined && query !== '') {
-            params.append('filter{id}[]', String(query));
+            params.append('filter', String(query));
         }
 
         if (filters !== null && filters !== undefined && filters.length > 0) {
@@ -66,6 +66,10 @@ export class UserService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=userprofile.*&include[]=groups.permissions.*`);
+        return this.http.get(`${this.API_URL}/${id}/?include[]=userprofile.*&include[]=groups.*&include[]=user_permissions.*`);
+    }
+
+    public getByIdPermissions(id: number): Observable<any> {
+        return this.http.get(`${this.API_URL}/${id}/?include[]=userprofile.*&include[]=groups.permissions.*&include[]=user_permissions.*`);
     }
 }

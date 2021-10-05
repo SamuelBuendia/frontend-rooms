@@ -30,6 +30,9 @@ import { ConfirmationService } from 'primeng/api';
 import { FunctionaryService } from './pages/functionary/_services';
 import { SpaceService } from './pages/space/_services';
 import { RoomService } from './pages/room/_services';
+import { PermissionService } from './pages/permission/_services';
+import { GroupService } from './pages/group/_services';
+import { ContentTypeService } from './pages/content-type/_services';
 
 function appInitializer(authService: AuthService) {
   return () => {
@@ -93,7 +96,10 @@ export function getHighlightLanguages() {
     ConfirmationService,
     FunctionaryService,
     SpaceService,
-    RoomService
+    RoomService,
+    PermissionService,
+    GroupService,
+    ContentTypeService,
   ],
   bootstrap: [AppComponent],
 })

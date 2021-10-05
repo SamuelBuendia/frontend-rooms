@@ -79,9 +79,9 @@ export class UserAutocompleteComponent implements ControlValueAccessor, OnInit {
         this.onTouched(this.value);
     }
 
-    public loadLazy(event) {
+    public loadLazy(event?) {
         this.filters = [];
-        if (event.sortField) {
+        if (event && event.sortField) {
             if (event.sortOrder === -1) {
                 this.sort = '-' + event.sortField;
             } else {
@@ -98,12 +98,12 @@ export class UserAutocompleteComponent implements ControlValueAccessor, OnInit {
         }
 
         if (event.query) {
-            this.filters.push({ key: 'filter{username.icontains}', value: event.query })
+            this.filters.push({ key: 'filter', value: event.query })
         } else {
             this.query = undefined;
         }
 
-        if (event.rows) {
+        if (event && event.rows) {
             this.per_page = event.rows;
         }
 
@@ -115,7 +115,7 @@ export class UserAutocompleteComponent implements ControlValueAccessor, OnInit {
     }
 
     getModels() {
-        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).toPromise().then(
+        this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).subscribe(
             response => {
                 this.models = response.users;
                 this.totalRecords = response.meta.total_results;

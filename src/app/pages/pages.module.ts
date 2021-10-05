@@ -52,6 +52,28 @@ import { RoomComponent } from './room/room.component';
 import { RoomEditComponent } from './room/rooms/room-edit/room-edit.component';
 import { RoomAutocompleteComponent } from './room/rooms/room-autocomplete/room-autocomplete.component';
 
+// Permission
+import { PermissionsComponent } from './permission/permissions/permissions.component';
+import { PermissionComponent } from './permission/permission.component';
+import { PermissionEditComponent } from './permission/permissions/permission-edit/permission-edit.component';
+import { PermissionAutocompleteComponent } from './permission/permissions/permission-autocomplete/permission-autocomplete.component';
+import { PermissionMultiselectComponent } from './permission/permissions/permission-multiselect/permission-multiselect.component';
+
+// Groups
+import { GroupsComponent } from './group/groups/groups.component';
+import { GroupComponent } from './group/group.component';
+import { GroupEditComponent } from './group/groups/group-edit/group-edit.component';
+import { GroupAutocompleteComponent } from './group/groups/group-autocomplete/group-autocomplete.component';
+import { GroupMultiselectComponent } from './group/groups/group-multiselect/group-multiselect.component';
+
+// ContentTypes
+import { ContentTypesComponent } from './content-type/content-types/content-types.component';
+import { ContentTypeComponent } from './content-type/content-type.component';
+import { ContentTypeEditComponent } from './content-type/content-types/content-type-edit/content-type-edit.component';
+import { ContentTypeSelectComponent } from './content-type/content-types/content-type-select/content-type-select.component';
+import { ContentTypeAutocompleteComponent } from './content-type/content-types/content-type-autocomplete/content-type-autocomplete.component';
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -96,6 +118,21 @@ import { RoomAutocompleteComponent } from './room/rooms/room-autocomplete/room-a
     RoomComponent,
     RoomEditComponent,
     RoomAutocompleteComponent,
+    PermissionsComponent,
+    PermissionComponent,
+    PermissionEditComponent,
+    PermissionAutocompleteComponent,
+    PermissionMultiselectComponent,
+    GroupsComponent,
+    GroupComponent,
+    GroupEditComponent,
+    GroupAutocompleteComponent,
+    GroupMultiselectComponent,
+    ContentTypesComponent,
+    ContentTypeComponent,
+    ContentTypeEditComponent,
+    ContentTypeSelectComponent,
+    ContentTypeAutocompleteComponent,
   ]
 })
 export class PagesModule { }

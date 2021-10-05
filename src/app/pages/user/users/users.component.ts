@@ -32,14 +32,14 @@ export class UsersComponent implements OnInit {
     public filters: { key: string, value: string }[];
     public _with: { key: string, value: string }[];
 
-    public formGroup: FormGroup;
-    public functionary_id_filter: AbstractControl;
-    public department_id_filter: AbstractControl;
-    public venue_id_filter: AbstractControl;
+    // public formGroup: FormGroup;
+    // public employee_id_filter: AbstractControl;
+    // public department_id_filter: AbstractControl;
+    // public venue_id_filter: AbstractControl;
 
     searchGroup: FormGroup;
 
-    public requesting: boolean;
+    public requesting: boolean = false;
 
     public confirmDialogPosition: string;
     public message_confirm_delete: string;
@@ -53,14 +53,14 @@ export class UsersComponent implements OnInit {
         private toastService: ToastService,
         public authService: AuthService,
         fb: FormBuilder) {
-        this.formGroup = fb.group({
-            'functionary_id_filter': [''],
-            'department_id_filter': [''],
-            'venue_id_filter': [''],
-        });
-        this.functionary_id_filter = this.formGroup.controls['functionary_id_filter'];
-        this.department_id_filter = this.formGroup.controls['department_id_filter'];
-        this.venue_id_filter = this.formGroup.controls['venue_id_filter'];
+        // this.formGroup = fb.group({
+        //     'employee_id_filter': [''],
+        //     'department_id_filter': [''],
+        //     'venue_id_filter': [''],
+        // });
+        // this.employee_id_filter = this.formGroup.controls['employee_id_filter'];
+        // this.department_id_filter = this.formGroup.controls['department_id_filter'];
+        // this.venue_id_filter = this.formGroup.controls['venue_id_filter'];
 
         this.searchGroup = fb.group({
             searchTerm: [''],
@@ -90,9 +90,12 @@ export class UsersComponent implements OnInit {
         this.requesting = false;
     }
 
-    public loadLazy(event: LazyLoadEvent) {
-        this.page = (event.first / this.per_page) + 1;
-        if (event.sortField) {
+    public loadLazy(event?: LazyLoadEvent) {
+        if (event && event.first) {
+            this.page = (event.first / this.per_page) + 1;
+        }
+
+        if (event && event.sortField) {
             if (event.sortOrder === -1) {
                 this.sort = '-' + event.sortField;
             } else {
@@ -102,13 +105,13 @@ export class UsersComponent implements OnInit {
             this.sort = '-id';
         }
 
-        if (event.globalFilter) {
+        if (event && event.globalFilter) {
             this.query = event.globalFilter;
         } else {
             this.query = undefined;
         }
 
-        if (event.rows) {
+        if (event && event.rows) {
             this.per_page = event.rows;
         }
 
@@ -118,6 +121,7 @@ export class UsersComponent implements OnInit {
 
     public getModels() {
         this.requesting = true;
+        setTimeout(() => {
         this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).toPromise().then(
             response => {
                 this.requesting = false;
@@ -137,6 +141,7 @@ export class UsersComponent implements OnInit {
                 );
             }
         );
+        }, 5)
     }
 
     // public showDeleteDialog(user: Model) {
