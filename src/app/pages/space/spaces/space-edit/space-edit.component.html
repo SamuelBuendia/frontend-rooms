@@ -95,6 +95,17 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'active')">{{ 'SPACE.ACTIVE' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'active')">{{ 'SPACE.ACTIVE' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div>
+            <div class="col-lg-4">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'SPACE.FUNCTIONARYS' | translate }}</label>
+              <app-functionary-multiselect
+              name="functionarys" [valid]="isControlValid('functionarys')" [touched]="isControlTouched('functionarys')" [class.is-invalid]="isControlInvalid('functionarys')"
+              [class.is-valid]="isControlValid('functionarys')" formControlName="functionarys" id="functionarys" [model]="model.functionarys"></app-functionary-multiselect>
+              <div class="feedback" *ngIf="!isControlTouched('functionarys')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'SPACE.FUNCTIONARYS' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('functionarys')">{{ 'SPACE.FUNCTIONARYS' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'functionarys')">{{ 'SPACE.FUNCTIONARYS' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'functionarys')">{{ 'SPACE.FUNCTIONARYS' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'functionarys')">{{ 'SPACE.FUNCTIONARYS' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
           </div>
           <div class="float-right">
             <a class="btn btn-default font-weight-bold mr-2" routerLink="/spaces">{{ 'COMMON.CANCEL' | translate }}</a>

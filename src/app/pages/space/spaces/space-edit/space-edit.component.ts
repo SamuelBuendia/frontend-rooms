@@ -30,6 +30,7 @@ export class SpaceEditComponent implements OnInit, OnDestroy {
   public description: AbstractControl;
   public active: AbstractControl;
   public functionary: AbstractControl;
+  public functionarys: AbstractControl;
    
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
@@ -56,12 +57,14 @@ export class SpaceEditComponent implements OnInit, OnDestroy {
       description: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       active: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       functionary: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(30)])],
+      functionarys: ['', Validators.compose([Validators.required])],
     });
     this.name = this.formGroup.controls['name'];
     this.number_space = this.formGroup.controls['number_space'];
     this.description = this.formGroup.controls['description'];
     this.active = this.formGroup.controls['active'];
     this.functionary = this.formGroup.controls['functionary'];
+    this.functionarys = this.formGroup.controls['functionarys'];
 
     this.parent = '/spaces';
   }
@@ -108,8 +111,8 @@ export class SpaceEditComponent implements OnInit, OnDestroy {
         this.model = response.space;
         if (response.functionaries) {
           this.model.functionary = response.functionaries[0];
+          this.model.functionarys = response.functionaries;
         }
-
         this.previous = Object.assign({}, this.model);
         this.loadForm();
       }
@@ -125,6 +128,9 @@ export class SpaceEditComponent implements OnInit, OnDestroy {
       this.number_space.setValue(this.model.number_space);
       this.description.setValue(this.model.description);
       this.active.setValue(this.model.active);
+      if (this.model.functionarys) {
+        this.functionarys.setValue(this.model.functionarys);
+      }
       if (this.model.functionary) {
         this.functionary.setValue(this.model.functionary);
       }
@@ -161,6 +167,12 @@ export class SpaceEditComponent implements OnInit, OnDestroy {
       model.functionary = this.model.functionary.id;
     }
 
+    let functionarys = [];
+    this.model.functionarys.forEach(element => {
+      functionarys.push(element.id);
+    });
+    model.functionarys = functionarys;
+
     const sbUpdate = this.modelsService.patch(this.id, model).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
@@ -196,8 +208,14 @@ export class SpaceEditComponent implements OnInit, OnDestroy {
 
     if (this.model.functionary) {
       model.functionary = this.model.functionary.id;
-    }
-        
+    }        
+
+    let functionarys = [];
+    this.model.functionarys.forEach(element => {
+      functionarys.push(element.id);
+    });
+    model.functionarys = functionarys;
+
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');

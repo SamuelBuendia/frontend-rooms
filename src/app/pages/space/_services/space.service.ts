@@ -50,7 +50,7 @@ export class SpaceService {
             });
         }
 
-        return this.http.get(`${this.API_URL}?${params}`);
+        return this.http.get(`${this.API_URL}?${params}&include[]=functionarys.*`);
     }
 
     public post(body: Object): Observable<any> {
@@ -66,6 +66,6 @@ export class SpaceService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=functionary.*`);
+        return this.http.get(`${this.API_URL}/${id}/?include[]=functionary.*&include[]=functionarys.*`);
     }
 }

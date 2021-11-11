@@ -7,4 +7,5 @@ export class SpaceModel {
   description: string;
   active: string;
   functionary: any;
+  functionarys: any[];
 }

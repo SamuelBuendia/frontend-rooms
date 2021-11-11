@@ -118,7 +118,7 @@ export class FunctionaryMultiselectComponent implements ControlValueAccessor, On
     getModels() {
         this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).toPromise().then(
             response => {
-                this.models = response.functionarys;
+                this.models = response.functionaries;
                 this.totalRecords = response.meta.total_results;
                 // if (this.model) {
                 //     if (this.model.id) {
