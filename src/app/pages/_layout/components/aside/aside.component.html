@@ -60,6 +60,15 @@
       </li>
       <!-- end::1 Level -->
 
+      <!-- begin::1 Level Rooms -->
+      <li class="menu-item" aria-haspopup="true" routerLinkActive="menu-item-active" *ngIf="authService.hasPermission('view_folder')">
+        <a class="menu-link" routerLink="/folders" routerLinkActive="active">
+          <span [inlineSVG]="'./assets/media/svg/icons/Code/Git2.svg'" cacheSVG="true" class="svg-icon menu-icon"></span>
+          <span class="menu-text">{{ 'FOLDER.FOLDERS' | translate }}</span>
+        </a>
+      </li>
+      <!-- end::1 Level -->
+
       <!-- begin::1 Level -->
       <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover" routerLinkActive="menu-item-open" *ngIf="authService.hasPermission('view_user')">
         <a class="menu-link menu-toggle" routerLinkActive="active">

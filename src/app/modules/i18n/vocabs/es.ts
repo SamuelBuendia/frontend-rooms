@@ -115,6 +115,18 @@ export const locale = {
       FUNCTIONARY: 'Encargado',
       SPACE: 'Espacio',
     },
+    FOLDER: {
+      FOLDER: 'Carpeta',
+      FOLDERS: 'Carpetas',
+      ID: 'Id',
+      NAME: 'Nombre Carpeta',
+      EXPIRATION_DATE: 'Fecha Vencimiento',
+      GUIDE_FILE: 'Adjunto Guía',
+      DESCRIPTION: 'Descripción',
+      ACTIVE: 'Activo',
+      FUNCTIONARY: 'Encargado',
+      ROOM: 'Sala',
+    },
     PERMISSION: {
       PERMISSION: 'Permiso',
       PERMISSIONS: 'Permisos',

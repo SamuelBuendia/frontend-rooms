@@ -52,6 +52,12 @@ import { RoomComponent } from './room/room.component';
 import { RoomEditComponent } from './room/rooms/room-edit/room-edit.component';
 import { RoomAutocompleteComponent } from './room/rooms/room-autocomplete/room-autocomplete.component';
 
+// Folders
+import { FoldersComponent } from './folder/folders/folders.component';
+import { FolderComponent } from './folder/folder.component';
+import { FolderEditComponent } from './folder/folders/folder-edit/folder-edit.component';
+import { FolderAutocompleteComponent } from './folder/folders/folder-autocomplete/folder-autocomplete.component';
+
 // Permission
 import { PermissionsComponent } from './permission/permissions/permissions.component';
 import { PermissionComponent } from './permission/permission.component';
@@ -118,6 +124,10 @@ import { ContentTypeAutocompleteComponent } from './content-type/content-types/c
     RoomComponent,
     RoomEditComponent,
     RoomAutocompleteComponent,
+    FoldersComponent,
+    FolderComponent,
+    FolderEditComponent,
+    FolderAutocompleteComponent,
     PermissionsComponent,
     PermissionComponent,
     PermissionEditComponent,

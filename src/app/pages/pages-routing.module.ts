@@ -56,6 +56,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'folders',
+        loadChildren: () =>
+          import('../pages/folder/folder-routing.module').then(
+            (m) => m.FolderRoutingModule
+          ),
+      },
+      {
         path: 'rooms',
         loadChildren: () =>
           import('../pages/room/room-routing.module').then(
