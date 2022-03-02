@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, of, Subscription } from 'rxjs';
+import { Observable, of, ReplaySubject, Subscription } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
@@ -26,12 +26,15 @@ export class FolderEditComponent implements OnInit, OnDestroy {
   };
 
   public name: AbstractControl;
-  public description: AbstractControl;
   public expiration_date: AbstractControl;
   public guide_file: AbstractControl;
   public active: AbstractControl;
   public functionary: AbstractControl;
   public room: AbstractControl;
+  public description: AbstractControl;
+
+  public files = [];
+  public fileBase64: string;
    
   public activeTabId: number;
   private subscriptions: Subscription[] = [];
@@ -55,7 +58,7 @@ export class FolderEditComponent implements OnInit, OnDestroy {
 
     this.formGroup = this.fb.group({
       name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      description: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
+      description: [''],
       expiration_date: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       guide_file: [''],
       active: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
@@ -69,6 +72,8 @@ export class FolderEditComponent implements OnInit, OnDestroy {
     this.active = this.formGroup.controls['active'];
     this.functionary = this.formGroup.controls['functionary'];
     this.room = this.formGroup.controls['room'];
+
+    this.files = [];
   }
 
   ngOnInit(): void {
@@ -95,7 +100,7 @@ export class FolderEditComponent implements OnInit, OnDestroy {
         if (this.id || this.id > 0) {
           return this.modelsService.getById(this.id);
         }
-        return of({ 'room': new Model() });
+        return of({ 'folder': new Model() });
       }),
       catchError((error) => {
         this.requesting = false;
@@ -108,7 +113,7 @@ export class FolderEditComponent implements OnInit, OnDestroy {
         Object.entries(messageError).forEach(
           ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
-        return of({ 'room': new Model() });
+        return of({ 'folder': new Model() });
       }),
     ).subscribe((response: any) => {
       this.requesting = false;
@@ -135,7 +140,12 @@ export class FolderEditComponent implements OnInit, OnDestroy {
       this.name.setValue(this.model.name);
       this.description.setValue(this.model.description);
       this.expiration_date.setValue(new Date(this.model.expiration_date));
-      // this.guide_file.setValue(this.model.guide_file);
+
+      this.files = [];
+      if (this.model.guide_file) {
+        this.files.push({name:this.model.name, guide_file:this.model.guide_file})
+      }
+
       this.active.setValue(this.model.active);
       if (this.model.functionary) {
         this.functionary.setValue(this.model.functionary);
@@ -176,7 +186,6 @@ export class FolderEditComponent implements OnInit, OnDestroy {
     this.requesting = true;
     let model = this.model;
     model.expiration_date = this.formatDate(this.expiration_date.value);
-    model.guide_file = this.model.guide_file;
     model.active = this.model.active;
     if (this.model.functionary) {
       model.functionary = this.model.functionary.id;
@@ -185,14 +194,16 @@ export class FolderEditComponent implements OnInit, OnDestroy {
       model.room = this.model.room.id;
     }
 
-    const sbUpdate = this.modelsService.patch(this.id, model).pipe(
+    model.guide_file = this.fileBase64;
+
+    const sbUpdate = this.modelsService.patch(this.id, model, this.files).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
           if(this.parent){
-            this.router.navigate([this.parent + '/rooms']);
+            this.router.navigate([this.parent + '/folders']);
           } else {
-            this.router.navigate(['/rooms']);
+            this.router.navigate(['/folders']);
           }
         }
       }),
@@ -211,7 +222,7 @@ export class FolderEditComponent implements OnInit, OnDestroy {
       })
     ).subscribe(response => {
       this.requesting = false;
-      this.model = response.room
+      this.model = response.folder
     });
     this.subscriptions.push(sbUpdate);
   }
@@ -221,7 +232,7 @@ export class FolderEditComponent implements OnInit, OnDestroy {
 
     let model = this.model;
     model.active = this.active.value;
-    model.guide_file = undefined;
+    model.guide_file = this.fileBase64;
 
     if (this.model.functionary) {
       model.functionary = this.model.functionary.id;
@@ -239,9 +250,9 @@ export class FolderEditComponent implements OnInit, OnDestroy {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
           if(this.parent){
-            this.router.navigate([this.parent + '/rooms']);
+            this.router.navigate([this.parent + '/folders']);
           } else {
-            this.router.navigate(['/rooms']);
+            this.router.navigate(['/folders']);
           }
         } else {
           this.formGroup.reset()
@@ -262,7 +273,7 @@ export class FolderEditComponent implements OnInit, OnDestroy {
       })
     ).subscribe(response => {
       this.requesting = false;
-      this.model = response.room as Model
+      this.model = response.folder as Model
     });
     this.subscriptions.push(sbCreate);
   }
@@ -304,6 +315,28 @@ export class FolderEditComponent implements OnInit, OnDestroy {
       stringClass += ' is-invalid';
     }
     return stringClass;
+  }
+
+  public onSelect(event) {
+    this.files = []
+    for(let file of event.files) {
+      this.files.push(file);
+    }
+    this.convertFile(event.files[0]).subscribe(base64 => {
+      this.fileBase64 = 'data:' + this.files[0].type + ';base64,' + base64;
+    });    
+  }
+
+  public showFile(url) {
+    window.open(url, '_blank');
+  }    
+
+  convertFile(file : File) : Observable<string> {
+    const result = new ReplaySubject<string>(1);
+    const reader = new FileReader();
+    reader.readAsBinaryString(file);
+    reader.onload = (event) => result.next(btoa(event.target.result.toString()));
+    return result;
   }
 
   public formatDate(date) {

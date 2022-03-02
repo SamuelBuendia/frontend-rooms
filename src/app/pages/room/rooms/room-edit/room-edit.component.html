@@ -32,10 +32,10 @@
           {{ 'COMMON.BASIC_INFO' | translate }}
         </a>
       </li>
-      <!-- <li *ngIf="model && model.id" class="nav-item cursor-pointer" (click)="changeTab(tabs.PROFILE)">
-        <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.PROFILE"
-          [class.active]="activeTabId === tabs.PROFILE">Profile</a>
-      </li> -->
+      <li *ngIf="model && model.id && authService.hasPermission('view_folder')" class="nav-item cursor-pointer" (click)="changeTab(tabs.FOLDER_TAB)">
+        <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.FOLDER_TAB"
+          [class.active]="activeTabId === tabs.FOLDER_TAB" routerLink="{{parent}}/edit/{{model.id}}/folders">{{ 'ROOM.FOLDERS' | translate }}</a>
+      </li>
     </ul>
 
     <ng-container *ngIf="activeTabId === tabs.BASIC_TAB">
@@ -115,6 +115,12 @@
               [disabled]="formGroup.invalid" (click)="save(true)">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
           </div>
         </form>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="activeTabId === tabs.FOLDER_TAB">
+      <div class="mt-5" *ngIf="model && model.id">
+        <app-folder></app-folder>
       </div>
     </ng-container>
   </div>

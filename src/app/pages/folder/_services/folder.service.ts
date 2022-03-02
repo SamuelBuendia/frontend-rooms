@@ -57,7 +57,7 @@ export class FolderService {
         return this.http.post(`${this.API_URL}`, JSON.stringify(body));
     }
 
-    public patch(id: number, body: Object): Observable<any> {
+    public patch(id: number, body: Object, files?:any[]): Observable<any> {
         return this.http.patch(`${this.API_URL}/${id}`, JSON.stringify(body));
     }
 

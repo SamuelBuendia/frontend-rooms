@@ -23,6 +23,7 @@ export class RoomEditComponent implements OnInit, OnDestroy {
 
   public tabs = {
     BASIC_TAB: 0,
+    FOLDER_TAB: 1,
   };
 
   public name: AbstractControl;
@@ -45,6 +46,7 @@ export class RoomEditComponent implements OnInit, OnDestroy {
     private modelsService: ModelsService,
     private router: Router,
     private route: ActivatedRoute,
+    public authService: AuthService,
     private toastService: ToastService,
     private spaceService: SpaceService,
   ) {
@@ -66,6 +68,8 @@ export class RoomEditComponent implements OnInit, OnDestroy {
     this.active = this.formGroup.controls['active'];
     this.functionary = this.formGroup.controls['functionary'];
     this.space = this.formGroup.controls['space'];
+
+    this.parent = '/rooms';
   }
 
   ngOnInit(): void {

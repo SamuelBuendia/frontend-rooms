@@ -47,7 +47,7 @@ export class FoldersComponent implements OnInit {
 
     public showTableCheckbox: boolean;
 
-    public spaceId: number;
+    public roomId: number;
     public parent: string;
 
     constructor(
@@ -128,9 +128,9 @@ export class FoldersComponent implements OnInit {
         if (this.route.parent.parent.parent.snapshot.url.length > 0) {
             this.route.parent.parent.parent.params.subscribe((params) => {
                 if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
-                    this.spaceId = params.id;
-                    this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.spaceId;
-                    this.filters.push({ key: 'filter{space}', value: this.spaceId.toString() })
+                    this.roomId = params.id;
+                    this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.roomId;
+                    this.filters.push({ key: 'filter{room}', value: this.roomId.toString() })
                 }
                 this.getModels();
             });
