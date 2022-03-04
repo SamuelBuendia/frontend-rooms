@@ -20,7 +20,16 @@ const routes: Routes = [
       },
       {
         path: 'edit/:id',
-        component: RoomEditComponent
+        component: RoomEditComponent,
+        children: [
+          {
+            path: 'folders',
+            loadChildren: () =>
+              import('../../pages/folder/folder-routing.module').then(
+                (m) => m.FolderRoutingModule
+              ),
+          },
+        ]
       },
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: '**', redirectTo: 'list', pathMatch: 'full' },

@@ -102,6 +102,7 @@ export const locale = {
       DESCRIPTION: 'Descripción',
       ACTIVE: 'Activo',
       FUNCTIONARY: 'Encargado',
+      FUNCTIONARYS: 'Estudiantes',
       ROOMS: 'Salas'
     },
     ROOM: {
@@ -114,6 +115,7 @@ export const locale = {
       ACTIVE: 'Activo',
       FUNCTIONARY: 'Encargado',
       SPACE: 'Espacio',
+      FOLDERS: 'Carpetas',
     },
     FOLDER: {
       FOLDER: 'Carpeta',

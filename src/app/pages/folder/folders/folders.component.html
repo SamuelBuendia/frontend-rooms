@@ -48,6 +48,13 @@
               {{ 'FOLDER.FUNCTIONARY' | translate }}
             </div>
           </th>
+          <th pSortableColumn="expiration_date">
+            <div class="p-d-flex p-jc-between p-ai-center">
+              {{ 'FOLDER.EXPIRATION_DATE' | translate }}
+              <!-- <p-sortIcon field="date_joined"></p-sortIcon>
+              <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
+            </div>
+          </th>
           <th pSortableColumn="created_at">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'COMMON.CREATED_AT' | translate }}
@@ -79,6 +86,9 @@
             {{value.functionary?.name}}
           </td>
           <td>
+            {{value.expiration_date | date: 'MM/dd/yyyy'}}
+          </td>
+          <td>
             {{value.created_at | date: 'MM/dd/yyyy'}}
           </td>
           <td style="text-align: right">
@@ -99,7 +109,7 @@
       </ng-template>
       <ng-template pTemplate="emptymessage">
         <tr>
-          <td colspan="5" class="text-center">{{ 'COMMON.NO_ITEMS_FOUND' | translate }}</td>
+          <td colspan="6" class="text-center">{{ 'COMMON.NO_ITEMS_FOUND' | translate }}</td>
         </tr>
       </ng-template>
     </p-table>

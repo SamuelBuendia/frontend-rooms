@@ -66,6 +66,6 @@ export class SpaceService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=functionary.*&include[]=functionarys.*`);
+        return this.http.get(`${this.API_URL}/${id}/?include[]=functionary.*&include[]=functionarys.*&include[]=functionarys.user.*`);
     }
 }

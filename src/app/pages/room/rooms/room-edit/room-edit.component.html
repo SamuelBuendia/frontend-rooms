@@ -32,7 +32,7 @@
           {{ 'COMMON.BASIC_INFO' | translate }}
         </a>
       </li>
-      <li *ngIf="model && model.id && authService.hasPermission('view_folder')" class="nav-item cursor-pointer" (click)="changeTab(tabs.FOLDER_TAB)">
+      <li *ngIf="model && model.id && authService.hasPermission('view_folder') && showFolderTab" class="nav-item cursor-pointer" (click)="changeTab(tabs.FOLDER_TAB)">
         <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.FOLDER_TAB"
           [class.active]="activeTabId === tabs.FOLDER_TAB" routerLink="{{parent}}/edit/{{model.id}}/folders">{{ 'ROOM.FOLDERS' | translate }}</a>
       </li>

@@ -54,12 +54,12 @@ export class UserEditComponent implements OnInit, OnDestroy {
 
     this.formGroup = this.fb.group({
       username: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
-      first_name: [''],
-      last_name: [''],
-      email: [''],
-      password: [''],
-      user_permissions: [''],
-      groups: [''],
+      first_name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
+      last_name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
+      email: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
+      password: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(100)])],
+      user_permissions: ['', Validators.compose([Validators.required])],
+      groups: ['', Validators.compose([Validators.required])],
       is_active: [''],
       is_staff: [''],
       is_superuser: ['']

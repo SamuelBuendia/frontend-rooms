@@ -40,6 +40,7 @@ export class RoomEditComponent implements OnInit, OnDestroy {
 
   public spaceId: number;
   public parent: string;
+  public showFolderTab: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -53,6 +54,7 @@ export class RoomEditComponent implements OnInit, OnDestroy {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info | 1 => Profile
     this.saveAndExit = false;
     this.requesting = false;
+    this.showFolderTab = true;
 
     this.formGroup = this.fb.group({
       name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
@@ -79,6 +81,7 @@ export class RoomEditComponent implements OnInit, OnDestroy {
 
     this.route.parent.parent.parent.params.subscribe((params) => {
       if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
+        this.showFolderTab = false
         this.spaceId = params.id;
         this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.spaceId;
       }
