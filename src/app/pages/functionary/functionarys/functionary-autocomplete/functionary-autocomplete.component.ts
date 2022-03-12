@@ -119,6 +119,15 @@ export class FunctionaryAutocompleteComponent implements ControlValueAccessor, O
             response => {
                 this.models = response.functionaries;
                 this.totalRecords = response.meta.total_results;
+
+                // response.users.forEach(user => {
+                //     this.models.forEach(element => {
+                //         if (element.user === user.id) {
+                //             element.user = user;
+                //         }
+                //     });
+                // });
+
                 // if (this.model) {
                 //     if (this.model.id) {
                 //         this.model.id = undefined;

@@ -5,8 +5,8 @@ import { environment } from '../../../../environments/environment';
 import { catchError, finalize, tap } from 'rxjs/operators';
 
 @Injectable()
-export class UserService {
-    API_URL = `${environment.apiUrl}users`;
+export class EvidenceService {
+    API_URL = `${environment.apiUrl}evidences`;
     private _subscriptions: Subscription[] = [];
 
     constructor(public http: HttpClient) { }
@@ -35,7 +35,7 @@ export class UserService {
         }
 
         if (query !== null && query !== undefined && query !== '') {
-            params.append('filter', String(query));
+            params.append('filter{id}[]', String(query));
         }
 
         if (filters !== null && filters !== undefined && filters.length > 0) {
@@ -50,14 +50,14 @@ export class UserService {
             });
         }
 
-        return this.http.get(`${this.API_URL}?${params}&include[]=userprofile.*`);
+        return this.http.get(`${this.API_URL}?${params}`);
     }
 
     public post(body: Object): Observable<any> {
         return this.http.post(`${this.API_URL}`, JSON.stringify(body));
     }
 
-    public patch(id: number, body: Object): Observable<any> {
+    public patch(id: number, body: Object, files?:any[]): Observable<any> {
         return this.http.patch(`${this.API_URL}/${id}`, JSON.stringify(body));
     }
 
@@ -66,10 +66,6 @@ export class UserService {
     }
 
     public getById(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=userprofile.*&include[]=groups.*&include[]=user_permissions.*&include[]=functionary.*`);
-    }
-
-    public getByIdPermissions(id: number): Observable<any> {
-        return this.http.get(`${this.API_URL}/${id}/?include[]=userprofile.*&include[]=groups.permissions.*&include[]=user_permissions.*&include[]=functionary.*`);
+        return this.http.get(`${this.API_URL}/${id}/?include[]=functionary.*&include[]=folder.*`);
     }
 }

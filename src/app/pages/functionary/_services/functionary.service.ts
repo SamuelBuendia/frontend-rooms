@@ -50,7 +50,7 @@ export class FunctionaryService {
             });
         }
 
-        return this.http.get(`${this.API_URL}?${params}`);
+        return this.http.get(`${this.API_URL}?${params}&include[]=user.*`);
     }
 
     public post(body: Object): Observable<any> {

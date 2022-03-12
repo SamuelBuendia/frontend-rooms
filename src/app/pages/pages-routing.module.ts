@@ -63,6 +63,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'evidences',
+        loadChildren: () =>
+          import('../pages/evidence/evidence-routing.module').then(
+            (m) => m.EvidenceRoutingModule
+          ),
+      },
+      {
         path: 'rooms',
         loadChildren: () =>
           import('../pages/room/room-routing.module').then(

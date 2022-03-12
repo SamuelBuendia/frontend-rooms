@@ -5,16 +5,16 @@ import { Observable, of, ReplaySubject, Subscription } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
-import { FolderModel as Model } from '../../_models/folder.model';
-import { FolderService as ModelsService } from '../../_services/folder.service';
-import { RoomService } from 'src/app/pages/room/_services';
+import { EvidenceModel as Model } from '../../_models/evidence.model';
+import { EvidenceService as ModelsService } from '../../_services/evidence.service';
+import { FolderService } from 'src/app/pages/folder/_services';
 
 @Component({
-  selector: 'app-folder-edit',
-  templateUrl: './folder-edit.component.html',
-  styleUrls: ['./folder-edit.component.scss']
+  selector: 'app-evidence-edit',
+  templateUrl: './evidence-edit.component.html',
+  styleUrls: ['./evidence-edit.component.scss']
 })
-export class FolderEditComponent implements OnInit, OnDestroy {
+export class EvidenceEditComponent implements OnInit, OnDestroy {
   public id: number;
   public model: Model;
   public previous: Model;
@@ -23,16 +23,16 @@ export class FolderEditComponent implements OnInit, OnDestroy {
 
   public tabs = {
     BASIC_TAB: 0,
-    EVIDENCE_TAB: 1
   };
 
-  public name: AbstractControl;
-  public expiration_date: AbstractControl;
-  public guide_file: AbstractControl;
+  public re_expiration_date: AbstractControl;
+  public evidence_file: AbstractControl;
   public active: AbstractControl;
   public functionary: AbstractControl;
-  public room: AbstractControl;
-  public description: AbstractControl;
+  public folder: AbstractControl;
+  public observation: AbstractControl;
+  public evidence_link: AbstractControl;
+  public qualification: AbstractControl;
 
   public files = [];
   public fileBase64: string;
@@ -42,43 +42,45 @@ export class FolderEditComponent implements OnInit, OnDestroy {
 
   public saveAndExit;
 
-  public roomId: number;
+  public folderId: number;
   public parent: string;
-  public showEvidenceTab: boolean;
+  public groupId: number;
 
   constructor(
     private fb: FormBuilder,
     private modelsService: ModelsService,
     private router: Router,
     private route: ActivatedRoute,
-    public authService: AuthService,
     private toastService: ToastService,
-    private roomService: RoomService,
+    public authService: AuthService,
+    private folderService: FolderService,
   ) {
     this.activeTabId = this.tabs.BASIC_TAB; // 0 => Basic info | 1 => Profile
     this.saveAndExit = false;
     this.requesting = false;
-    this.showEvidenceTab = true;
+    this.groupId = this.authService.currentUserValue.groups[0].id;
+    console.log(this.groupId)
 
     this.formGroup = this.fb.group({
-      name: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      description: [''],
-      expiration_date: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
-      guide_file: [''],
+      observation: [''],
+      evidence_link: [''],
+      qualification: [''],
+      re_expiration_date: [''],
+      evidence_file: [''],
       active: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       functionary: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(30)])],
-      room: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(30)])],
+      folder: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(30)])],
     });
-    this.name = this.formGroup.controls['name'];
-    this.description = this.formGroup.controls['description'];
-    this.expiration_date = this.formGroup.controls['expiration_date'];
-    this.guide_file = this.formGroup.controls['guide_file'];
+    this.observation = this.formGroup.controls['observation'];
+    this.evidence_link = this.formGroup.controls['evidence_link'];
+    this.qualification = this.formGroup.controls['qualification'];
+    this.re_expiration_date = this.formGroup.controls['re_expiration_date'];
+    this.evidence_file = this.formGroup.controls['evidence_file'];
     this.active = this.formGroup.controls['active'];
     this.functionary = this.formGroup.controls['functionary'];
-    this.room = this.formGroup.controls['room'];
+    this.folder = this.formGroup.controls['folder'];
 
     this.files = [];
-    this.parent = '/folders';
   }
 
   ngOnInit(): void {
@@ -88,9 +90,8 @@ export class FolderEditComponent implements OnInit, OnDestroy {
 
     this.route.parent.parent.parent.params.subscribe((params) => {
       if (this.route.parent.parent.parent.parent.parent.snapshot.url.length > 0) {
-        this.showEvidenceTab = false
-        this.roomId = params.id;
-        this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.roomId;
+        this.folderId = params.id;
+        this.parent = '/' + this.route.parent.parent.parent.parent.parent.snapshot.url[0].path + '/edit/' + this.folderId;
       }
       this.get();
     });
@@ -106,7 +107,7 @@ export class FolderEditComponent implements OnInit, OnDestroy {
         if (this.id || this.id > 0) {
           return this.modelsService.getById(this.id);
         }
-        return of({ 'folder': new Model() });
+        return of({ 'evidence': new Model() });
       }),
       catchError((error) => {
         this.requesting = false;
@@ -119,18 +120,18 @@ export class FolderEditComponent implements OnInit, OnDestroy {
         Object.entries(messageError).forEach(
           ([key, value]) => this.toastService.growl('error', key + ': ' + value)
         );
-        return of({ 'folder': new Model() });
+        return of({ 'evidence': new Model() });
       }),
     ).subscribe((response: any) => {
       this.requesting = false;
       if (response) {
-        this.model = response.folder;
+        this.model = response.evidence;
         if (response.functionaries) {
           this.model.functionary = response.functionaries[0];
         }
-        // let rooms = response['+rooms'];
-        if (response.rooms) {
-          this.model.room = response.rooms[0];
+        // let folders = response['+folders'];
+        if (response.folders) {
+          this.model.folder = response.folders[0];
         }
         this.previous = Object.assign({}, this.model);
         this.loadForm();
@@ -143,28 +144,33 @@ export class FolderEditComponent implements OnInit, OnDestroy {
     this.active.setValue(true);
     
     if (this.model.id) {
-      this.name.setValue(this.model.name);
-      this.description.setValue(this.model.description);
-      this.expiration_date.setValue(new Date(this.model.expiration_date));
+      this.observation.setValue(this.model.observation);
+      this.evidence_link.setValue(this.model.evidence_link);
+      this.qualification.setValue(this.model.qualification);
+      this.re_expiration_date.setValue(new Date(this.model.re_expiration_date));
 
       this.files = [];
-      if (this.model.guide_file) {
-        this.files.push({name:this.model.name, guide_file:this.model.guide_file})
+      if (this.model.evidence_file) {
+        this.files.push({name:this.model.functionary.name, evidence_file:this.model.evidence_file})
       }
 
       this.active.setValue(this.model.active);
       if (this.model.functionary) {
         this.functionary.setValue(this.model.functionary);
       }
-      if (this.model.room) {
-        this.room.setValue(this.model.room);
+      if (this.model.folder) {
+        this.folder.setValue(this.model.folder);
       }
     } else {
-      if (this.roomId) {
-        this.GetRoomById(this.roomId);
+      if (this.folderId) {
+        this.GetFolderById(this.folderId);
       }
-      this.functionary.setValue(this.authService.currentUserValue.functionary);
     }
+
+    if(this.groupId === 3){
+      this.qualification.setValidators(Validators.compose([Validators.required, Validators.minLength(1)]))
+    }
+
     this.formGroup.markAllAsTouched();
   }
 
@@ -192,25 +198,25 @@ export class FolderEditComponent implements OnInit, OnDestroy {
   edit() {
     this.requesting = true;
     let model = this.model;
-    model.expiration_date = this.formatDate(this.expiration_date.value);
+    model.re_expiration_date = this.formatDate(this.re_expiration_date.value);
     model.active = this.model.active;
     if (this.model.functionary) {
       model.functionary = this.model.functionary.id;
     }
-    if (this.model.room) {
-      model.room = this.model.room.id;
+    if (this.model.folder) {
+      model.folder = this.model.folder.id;
     }
 
-    model.guide_file = this.fileBase64;
+    model.evidence_file = this.fileBase64;
 
     const sbUpdate = this.modelsService.patch(this.id, model, this.files).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
           if(this.parent){
-            this.router.navigate([this.parent + '/folders']);
+            this.router.navigate([this.parent + '/evidences']);
           } else {
-            this.router.navigate(['/folders']);
+            this.router.navigate(['/evidences']);
           }
         }
       }),
@@ -229,7 +235,7 @@ export class FolderEditComponent implements OnInit, OnDestroy {
       })
     ).subscribe(response => {
       this.requesting = false;
-      this.model = response.folder
+      this.model = response.evidence
     });
     this.subscriptions.push(sbUpdate);
   }
@@ -239,27 +245,27 @@ export class FolderEditComponent implements OnInit, OnDestroy {
 
     let model = this.model;
     model.active = this.active.value;
-    model.guide_file = this.fileBase64;
+    model.evidence_file = this.fileBase64;
 
     if (this.model.functionary) {
       model.functionary = this.model.functionary.id;
     }
 
-    model.expiration_date = undefined;
-    if (this.expiration_date.value) {
-      model.expiration_date = this.formatDate(this.expiration_date.value);
+    model.re_expiration_date = undefined;
+    if (this.re_expiration_date.value) {
+      model.re_expiration_date = this.formatDate(this.re_expiration_date.value);
     }
 
-    model.room = this.model.room.id;
+    model.folder = this.model.folder.id;
     
     const sbCreate = this.modelsService.post(model).pipe(
       tap(() => {
         this.toastService.growl('success', 'success');
         if (this.saveAndExit) {
           if(this.parent){
-            this.router.navigate([this.parent + '/folders']);
+            this.router.navigate([this.parent + '/evidences']);
           } else {
-            this.router.navigate(['/folders']);
+            this.router.navigate(['/evidences']);
           }
         } else {
           this.formGroup.reset()
@@ -280,7 +286,7 @@ export class FolderEditComponent implements OnInit, OnDestroy {
       })
     ).subscribe(response => {
       this.requesting = false;
-      this.model = response.folder as Model
+      this.model = response.evidence as Model
     });
     this.subscriptions.push(sbCreate);
   }
@@ -377,13 +383,13 @@ export class FolderEditComponent implements OnInit, OnDestroy {
     return [year, month, day].join('-');
   }
 
-  GetRoomById(id) {
-    this.roomService.getById(id).toPromise().then(
+  GetFolderById(id) {
+    this.folderService.getById(id).toPromise().then(
       response => {
-        this.room.setValue(response.room)
+        this.folder.setValue(response.folder)
       },
       error => {
-        console.log('error getting room');
+        console.log('error getting folder');
       }
     );
   }

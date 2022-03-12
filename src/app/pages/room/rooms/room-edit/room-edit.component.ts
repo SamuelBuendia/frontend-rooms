@@ -150,6 +150,7 @@ export class RoomEditComponent implements OnInit, OnDestroy {
       if (this.spaceId) {
         this.GetSpaceById(this.spaceId);
       }
+      this.functionary.setValue(this.authService.currentUserValue.functionary);
     }
     this.formGroup.markAllAsTouched();
   }

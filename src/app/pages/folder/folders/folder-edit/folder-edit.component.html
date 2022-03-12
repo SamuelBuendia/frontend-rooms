@@ -32,10 +32,10 @@
           {{ 'COMMON.BASIC_INFO' | translate }}
         </a>
       </li>
-      <!-- <li *ngIf="model && model.id" class="nav-item cursor-pointer" (click)="changeTab(tabs.PROFILE)">
-        <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.PROFILE"
-          [class.active]="activeTabId === tabs.PROFILE">Profile</a>
-      </li> -->
+      <li *ngIf="model && model.id && authService.hasPermission('view_evidence') && showEvidenceTab" class="nav-item cursor-pointer" (click)="changeTab(tabs.EVIDENCE_TAB)">
+        <a class="nav-link" data-toggle="tab" role="button" [attr.aria-selected]="activeTabId === tabs.EVIDENCE_TAB"
+          [class.active]="activeTabId === tabs.EVIDENCE_TAB" routerLink="{{parent}}/edit/{{model.id}}/evidences">{{ 'EVIDENCE.EVIDENCES' | translate }}</a>
+      </li>
     </ul>
 
     <ng-container *ngIf="activeTabId === tabs.BASIC_TAB">
@@ -53,17 +53,6 @@
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'functionary')">{{ 'FOLDER.FUNCTIONARY' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'functionary')">{{ 'FOLDER.FUNCTIONARY' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
             </div>  
-            <div class="col-lg-4 mb-3">
-              <label>{{ 'COMMON.ENTER' | translate }} {{ 'FOLDER.NAME' | translate }}</label>
-              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
-                name="name" [class.is-invalid]="isControlInvalid('name')"
-                [class.is-valid]="isControlValid('name')" formControlName="name" />
-              <div class="feedback" *ngIf="!isControlTouched('name')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'FOLDER.NAME' | translate }}</b></div>
-              <div class="valid-feedback" *ngIf="isControlValid('name')">{{ 'FOLDER.NAME' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('required', 'name')">{{ 'FOLDER.NAME' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'name')">{{ 'FOLDER.NAME' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
-              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'name')">{{ 'FOLDER.NAME' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
-            </div>
             <!-- <div class="col-lg-4 mb-3">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'FOLDER.DESCRIPTION' | translate }}</label>
               <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
@@ -85,6 +74,17 @@
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'room')">{{ 'FOLDER.ROOM' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'room')">{{ 'FOLDER.ROOM' | translate}} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
               <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'room')">{{ 'FOLDER.ROOM' | translate}} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 30</div>
+            </div>
+            <div class="col-lg-4 mb-3">
+              <label>{{ 'COMMON.ENTER' | translate }} {{ 'FOLDER.NAME' | translate }}</label>
+              <input type="text" class="form-control form-control-lg form-control-solid" autocomplete="off"
+                name="name" [class.is-invalid]="isControlInvalid('name')"
+                [class.is-valid]="isControlValid('name')" formControlName="name" />
+              <div class="feedback" *ngIf="!isControlTouched('name')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'FOLDER.NAME' | translate }}</b></div>
+              <div class="valid-feedback" *ngIf="isControlValid('name')">{{ 'FOLDER.NAME' | translate }}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('required', 'name')">{{ 'FOLDER.NAME' | translate }}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('minlength', 'name')">{{ 'FOLDER.NAME' | translate }} {{ 'COMMON.SHOULD_HAVE_LEAST' | translate }} 3</div>
+              <div class="invalid-feedback" *ngIf="controlHasError('maxLength', 'name')">{{ 'FOLDER.NAME' | translate }} {{ 'COMMON.SHOULD_HAVE_MAXIMUM' | translate }} 100</div>
             </div>
             <div class="col-lg-4 mb-3">
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'FOLDER.EXPIRATION_DATE' | translate}}</label>
@@ -137,6 +137,12 @@
               [disabled]="formGroup.invalid" (click)="save(true)">{{ 'COMMON.SAVE_AND_EXIT' | translate }}</button>
           </div>
         </form>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="activeTabId === tabs.EVIDENCE_TAB">
+      <div class="mt-5" *ngIf="model && model.id">
+        <app-evidence></app-evidence>
       </div>
     </ng-container>
   </div>

@@ -1,22 +1,22 @@
 import { Component, forwardRef, Renderer2, ViewChild, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { FunctionaryService as ModelsService } from '../../_services/functionary.service';
+import { EvidenceService as ModelsService } from '../../_services/evidence.service';
 import { LazyLoadEvent } from 'primeng/api';
 import { ToastService } from 'src/app/modules/toast/_services/toast.service';
 import { AuthService } from 'src/app/modules/auth';
 export const EPANDED_TEXTAREA_VALUE_ACCESSOR: any = {
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => FunctionaryMultiselectComponent),
+    useExisting: forwardRef(() => EvidenceAutocompleteComponent),
     multi: true,
 };
 
 @Component({
-    selector: 'app-functionary-multiselect',
-    templateUrl: './functionary-multiselect.component.html',
-    styleUrls: ['./functionary-multiselect.component.scss'],
+    selector: 'app-evidence-autocomplete',
+    templateUrl: './evidence-autocomplete.component.html',
+    styleUrls: ['./evidence-autocomplete.component.scss'],
     providers: [EPANDED_TEXTAREA_VALUE_ACCESSOR],
 })
-export class FunctionaryMultiselectComponent implements ControlValueAccessor, OnInit {
+export class EvidenceAutocompleteComponent implements ControlValueAccessor, OnInit {
     @Input() model: any;
     @Input() valid: boolean;
     @Input() touched: boolean;
@@ -54,14 +54,6 @@ export class FunctionaryMultiselectComponent implements ControlValueAccessor, On
         if (!this.placeholder) {
             this.placeholder = '';
         }
-
-        this.filters = [];
-        if (this.addFilters) {
-            this.addFilters.forEach(element => {
-                this.filters.push({ key: 'filter{' + element.key + '}', value: element.value })
-            });
-        }
-        this.getModels();
     }
 
     writeValue(value: any) {
@@ -83,12 +75,12 @@ export class FunctionaryMultiselectComponent implements ControlValueAccessor, On
     }
 
     public change($event) {
-        this.getModels();
         this.onChange(this.value);
         this.onTouched(this.value);
     }
 
-    public loadLazy(event: LazyLoadEvent) {
+    public loadLazy(event) {
+        this.filters = [];
         if (event.sortField) {
             if (event.sortOrder === -1) {
                 this.sort = '-' + event.sortField;
@@ -105,8 +97,8 @@ export class FunctionaryMultiselectComponent implements ControlValueAccessor, On
             });
         }
 
-        if (event.globalFilter) {
-            this.query = event.globalFilter;
+        if (event.query) {
+            this.filters.push({ key: 'filter{name.icontains}', value: event.query })
         } else {
             this.query = undefined;
         }
@@ -116,16 +108,16 @@ export class FunctionaryMultiselectComponent implements ControlValueAccessor, On
         }
 
 
-        // if (!this.firstTime) {
-        this.getModels();
-        // }
+        if (!this.firstTime) {
+            this.getModels();
+        }
         this.firstTime = false;
     }
 
     getModels() {
         this.modelsService.get(this.page, this.per_page, this.sort, this.query, this.filters, this._with).toPromise().then(
             response => {
-                this.models = response.functionaries;
+                this.models = response.evidences;
                 this.totalRecords = response.meta.total_results;
                 // if (this.model) {
                 //     if (this.model.id) {

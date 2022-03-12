@@ -58,6 +58,12 @@ import { FolderComponent } from './folder/folder.component';
 import { FolderEditComponent } from './folder/folders/folder-edit/folder-edit.component';
 import { FolderAutocompleteComponent } from './folder/folders/folder-autocomplete/folder-autocomplete.component';
 
+// Evidences
+import { EvidencesComponent } from './evidence/evidences/evidences.component';
+import { EvidenceComponent } from './evidence/evidence.component';
+import { EvidenceEditComponent } from './evidence/evidences/evidence-edit/evidence-edit.component';
+import { EvidenceAutocompleteComponent } from './evidence/evidences/evidence-autocomplete/evidence-autocomplete.component';
+
 // Permission
 import { PermissionsComponent } from './permission/permissions/permissions.component';
 import { PermissionComponent } from './permission/permission.component';
@@ -143,6 +149,10 @@ import { ContentTypeAutocompleteComponent } from './content-type/content-types/c
     ContentTypeEditComponent,
     ContentTypeSelectComponent,
     ContentTypeAutocompleteComponent,
+    EvidencesComponent,
+    EvidenceComponent,
+    EvidenceEditComponent,
+    EvidenceAutocompleteComponent
   ]
 })
 export class PagesModule { }

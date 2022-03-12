@@ -95,17 +95,17 @@ export class LoginComponent implements OnInit, OnDestroy {
             .pipe(first())
             .subscribe((user: any) => {  
               let model = user;
-              if (user.employees) {
-                model.user.employee = user.employees[0];
+              if (user.functionaries) {
+                model.user.functionary = user.functionaries[0];
                 if (user.positions) {
-                  model.user.employee.position = user.positions[0];
+                  model.user.functionary.position = user.positions[0];
                   if (user.departments) {
-                    model.user.employee.position.department = user.departments[0];
+                    model.user.functionary.position.department = user.departments[0];
                   }
                 }
   
                 if (user.divisions) {
-                  model.user.employee.divisions = user.divisions;
+                  model.user.functionary.divisions = user.divisions;
                 }
               }
   

@@ -20,7 +20,16 @@ const routes: Routes = [
       },
       {
         path: 'edit/:id',
-        component: FolderEditComponent
+        component: FolderEditComponent,
+        children: [
+          {
+            path: 'evidences',
+            loadChildren: () =>
+              import('../../pages/evidence/evidence-routing.module').then(
+                (m) => m.EvidenceRoutingModule
+              ),
+          },
+        ]
       },
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: '**', redirectTo: 'list', pathMatch: 'full' },

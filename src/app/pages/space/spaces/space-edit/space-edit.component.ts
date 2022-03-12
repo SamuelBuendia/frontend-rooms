@@ -134,6 +134,8 @@ export class SpaceEditComponent implements OnInit, OnDestroy {
       if (this.model.functionary) {
         this.functionary.setValue(this.model.functionary);
       }
+    } else {
+      this.functionary.setValue(this.authService.currentUserValue.functionary);
     }
     this.formGroup.markAllAsTouched();
   }
@@ -169,7 +171,9 @@ export class SpaceEditComponent implements OnInit, OnDestroy {
 
     let functionarys = [];
     this.model.functionarys.forEach(element => {
-      functionarys.push(element.id);
+      if(element.id != model.functionary) {
+        functionarys.push(element.id);
+      }
     });
     model.functionarys = functionarys;
 
