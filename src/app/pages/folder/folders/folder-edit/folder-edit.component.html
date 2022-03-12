@@ -46,7 +46,7 @@
               <label>{{ 'COMMON.ENTER' | translate }} {{ 'FOLDER.FUNCTIONARY' | translate}}</label>
               <app-functionary-autocomplete
               name="functionary" [valid]="isControlValid('functionary')" [touched]="isControlTouched('functionary')" [class.is-invalid]="isControlInvalid('functionary')"
-              [class.is-valid]="isControlValid('functionary')" formControlName="functionary" id="functionary" [model]="model.functionary"></app-functionary-autocomplete>
+              [class.is-valid]="isControlValid('functionary')" formControlName="functionary" id="functionary" [model]="model.functionary" [addFilters]="[{key: 'user.groups', value: 3}]"></app-functionary-autocomplete>
               <div class="feedback" *ngIf="!isControlTouched('functionary')">{{ 'COMMON.PLEASE_ENTER' | translate }} <b>{{ 'FOLDER.FUNCTIONARY' | translate}}</b></div>
               <div class="valid-feedback" *ngIf="isControlValid('functionary')">{{ 'FOLDER.FUNCTIONARY' | translate}}  {{ 'COMMON.WAS_ENTERED_CORRECT' | translate }}</div>
               <div class="invalid-feedback" *ngIf="controlHasError('required', 'functionary')">{{ 'FOLDER.FUNCTIONARY' | translate}}  {{ 'COMMON.IS_REQUIRED' | translate }}</div>

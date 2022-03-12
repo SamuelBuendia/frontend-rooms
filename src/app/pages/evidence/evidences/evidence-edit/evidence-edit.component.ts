@@ -29,6 +29,7 @@ export class EvidenceEditComponent implements OnInit, OnDestroy {
   public evidence_file: AbstractControl;
   public active: AbstractControl;
   public functionary: AbstractControl;
+  public teacher: AbstractControl;
   public folder: AbstractControl;
   public observation: AbstractControl;
   public evidence_link: AbstractControl;
@@ -69,6 +70,7 @@ export class EvidenceEditComponent implements OnInit, OnDestroy {
       evidence_file: [''],
       active: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])],
       functionary: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(30)])],
+      teacher: [''],
       folder: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(30)])],
     });
     this.observation = this.formGroup.controls['observation'];
@@ -78,6 +80,7 @@ export class EvidenceEditComponent implements OnInit, OnDestroy {
     this.evidence_file = this.formGroup.controls['evidence_file'];
     this.active = this.formGroup.controls['active'];
     this.functionary = this.formGroup.controls['functionary'];
+    this.teacher = this.formGroup.controls['teacher'];
     this.folder = this.formGroup.controls['folder'];
 
     this.files = [];
@@ -158,6 +161,9 @@ export class EvidenceEditComponent implements OnInit, OnDestroy {
       if (this.model.functionary) {
         this.functionary.setValue(this.model.functionary);
       }
+      if (this.model.teacher) {
+        this.teacher.setValue(this.model.teacher);
+      }
       if (this.model.folder) {
         this.folder.setValue(this.model.folder);
       }
@@ -202,6 +208,9 @@ export class EvidenceEditComponent implements OnInit, OnDestroy {
     model.active = this.model.active;
     if (this.model.functionary) {
       model.functionary = this.model.functionary.id;
+    }
+    if (this.model.teacher) {
+      model.teacher = this.model.teacher.id;
     }
     if (this.model.folder) {
       model.folder = this.model.folder.id;
@@ -249,6 +258,10 @@ export class EvidenceEditComponent implements OnInit, OnDestroy {
 
     if (this.model.functionary) {
       model.functionary = this.model.functionary.id;
+    }
+
+    if (this.model.teacher) {
+      model.teacher = this.model.teacher.id;
     }
 
     model.re_expiration_date = undefined;

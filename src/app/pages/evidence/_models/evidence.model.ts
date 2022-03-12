@@ -10,4 +10,5 @@ export class EvidenceModel {
   evidence_file: string;
   folder: any;
   functionary: any;
+  teacher: any;
 }
