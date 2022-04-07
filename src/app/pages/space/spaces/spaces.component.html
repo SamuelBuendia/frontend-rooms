@@ -4,7 +4,7 @@
       <h3 class="card-label">{{ 'COMMON.LIST' | translate }}</h3>
     </div>
     <div class="card-toolbar">
-      <a type="button" class="btn btn-primary" routerLink="/spaces/add">{{ 'COMMON.NEW' | translate }}</a>
+      <a type="button" class="btn btn-primary" *ngIf="authService.hasPermission('add_space')" routerLink="/spaces/add">{{ 'COMMON.NEW' | translate }}</a>
     </div>
   </div>
   <div class="card-body">
@@ -60,7 +60,7 @@
               <p-columnFilter type="date_joined" field="date_joined" display="menu" class="p-ml-auto"></p-columnFilter> -->
             </div>
           </th>
-          <th style="width: 10rem">
+          <th style="width: 10rem" *ngIf="authService.hasPermission('change_space') || authService.hasPermission('delete_space')">
             <div class="p-d-flex p-jc-between p-ai-center">
               {{ 'COMMON.ACTION' | translate }}
               <!-- <p-sortIcon field="date_joined"></p-sortIcon>
@@ -89,15 +89,15 @@
           <td>
             {{value.created_at | date: 'MM/dd/yyyy'}}
           </td>
-          <td style="text-align: right">
+          <td style="text-align: right" *ngIf="authService.hasPermission('change_space') || authService.hasPermission('delete_space')">
             <a title="{{ 'COMMON.EDIT' | translate }}" class="btn btn-icon btn-light btn-hover-primary btn-sm" style="margin-right: 5px;"
-              [routerLink]="'/spaces/edit/' + value.id"  *ngIf="authService.hasPermission('add_space')">
+              [routerLink]="'/spaces/edit/' + value.id"  *ngIf="authService.hasPermission('change_space')">
               <span [inlineSVG]="'./assets/media/svg/icons/Communication/Write.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-primary">
               </span>
             </a>
             <a title="{{ 'COMMON.DELETE' | translate }}" class="btn btn-icon btn-light btn-hover-danger btn-sm"
-              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('change_space')">
+              (click)="confirm(value.id, 'right')" *ngIf="authService.hasPermission('delete_space')">
               <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'" cacheSVG="true"
                 class="svg-icon svg-icon-md svg-icon-danger">
               </span>
