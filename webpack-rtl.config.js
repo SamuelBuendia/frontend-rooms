@@ -1,4 +1,4 @@
-/**
+  /**
  * Main file of webpack config for RTL.
  * Please do not modified unless you know what to do
  */
@@ -32,7 +32,7 @@ const mainConfig = function() {
       // output path based on the entries' filename
       filename: "[name].js"
     },
-    resolve: { extensions: [".scss"] },
+    resolve: { extensions: [".scss", '*','.js', '.json'] },
     plugins: [
       // webpack log message
       new WebpackMessages({
@@ -61,6 +61,9 @@ const mainConfig = function() {
     module: {
       rules: [
         {
+          // test: /\.mjs$/,
+          include: /node_modules/,
+          type: 'javascript/auto',
           test: /\.scss$/,
           use: [
             MiniCssExtractPlugin.loader,
